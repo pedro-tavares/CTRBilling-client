@@ -1,0 +1,26 @@
+package com.javalabs.client.service;
+
+import java.util.List;
+
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
+import org.fusesource.restygwt.client.MethodCallback;
+import org.fusesource.restygwt.client.RestService;
+
+import com.javalabs.constants.IConstants;
+import com.javalabs.dto.User;
+
+@Path(IConstants.SERVER + "/users")
+public interface IUserService extends RestService {
+	
+	@POST
+	@Path("/addUser")
+	public void saveUser(@BeanParam User user, MethodCallback<User> callback);
+
+	@GET
+	@Path("/getAllUsers")
+	public void getAllUsers(MethodCallback<List<User>> callback);
+}
