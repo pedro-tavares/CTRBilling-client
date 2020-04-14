@@ -27,12 +27,9 @@ import com.javalabs.client.ui.TestbedPanel;
 
 public class JavaLabs implements EntryPoint {
 	
-	private Image javaImg = new Image("images/Java_1.png");
-	private HorizontalPanel bottomPanel = new HorizontalPanel();
-	
 	@Override
 	public void onModuleLoad() {
-		addAuthHeaders();
+//		addAuthHeaders();
 		createUI();
 	}
 
@@ -61,7 +58,7 @@ public class JavaLabs implements EntryPoint {
 	
 	private void createUI() {
 				
-		Image centerImg = new Image("images/background.jpg");
+		Image centerImg = new Image("images/background.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);
 		
@@ -72,29 +69,6 @@ public class JavaLabs implements EntryPoint {
 		topPanel.add(logoImg);
 		RootPanel.get().add(topPanel, 0, 0);
 		
-		VerticalPanel presentationPanel = new VerticalPanel();
-		presentationPanel.setStyleName("presentationPanel");
-		presentationPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		presentationPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);	
-		Label presentation1Lbl = new Label("The Best Java Skills Assessment Platform");
-		presentation1Lbl.setStyleName("presentation1Lbl");
-		presentationPanel.add(presentation1Lbl);
-		Label presentation2Lbl = new Label("1000+ carefully curated questions");
-		presentation2Lbl.setStyleName("presentation2Lbl");
-		presentationPanel.add(presentation2Lbl);
-		RootPanel.get().add(presentationPanel, 0, 66);
-		
-		bottomPanel.setStyleName("bottomPanel");
-		bottomPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		bottomPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		Anchor indiegogoLnk = new Anchor(
-			"JavaLabs is a product by CloudLabs. Support our Indiegogo Campaign", 
-			"https://www.indiegogo.com/projects/java-knowledge-base/x/7465742#/", "_blank"
-		);
-		bottomPanel.add(indiegogoLnk);
-		RootPanel.get().add(bottomPanel, 0, Window.getClientHeight() - 25);
-		
-		javaImg.setPixelSize(100, 100);
 		resize();
 		
 		Window.addResizeHandler(new ResizeHandler() {
@@ -119,14 +93,12 @@ public class JavaLabs implements EntryPoint {
 	private void createCenterPanel() {
 		CenterPanel centerPanel = new CenterPanel();
 		RootPanel.get().add(centerPanel, 0, 150);
-		
+/*		
 		TestbedPanel testbedPanel = new TestbedPanel();
 		centerPanel.add(testbedPanel);
-		
+*/		
 	}
 	
 	private void resize() {
-		RootPanel.get().add(javaImg, Window.getClientWidth() - 100, Window.getClientHeight() - 125);
-		RootPanel.get().add(bottomPanel, 0, Window.getClientHeight() - 25);
 	}
 }
