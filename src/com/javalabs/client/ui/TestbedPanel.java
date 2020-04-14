@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.javalabs.IUIConstants;
 import com.javalabs.client.service.ServiceFactory;
-import com.javalabs.dto.User;
+import com.javalabs.shared.dto.User;
 
 public class TestbedPanel extends VerticalPanel {
 	

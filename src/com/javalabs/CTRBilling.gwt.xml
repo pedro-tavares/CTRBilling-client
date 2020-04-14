@@ -21,7 +21,9 @@
 	<inherits name="com.googlecode.gwt.crypto.Crypto"/>
 
 	<!-- Other module inherits -->
+<!-- 
 	<inherits name="backend" />
+-->
 	
 	<!-- Specify the app entry point class. -->
 	<entry-point class='com.javalabs.client.JavaLabs' />

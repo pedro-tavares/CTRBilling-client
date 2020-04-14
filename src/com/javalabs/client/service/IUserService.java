@@ -10,10 +10,9 @@ import javax.ws.rs.Path;
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
-import com.javalabs.constants.IConstants;
-import com.javalabs.dto.User;
+import com.javalabs.shared.dto.User;
 
-@Path(IConstants.SERVER + "/users")
+@Path("http://localhost:8088" + "/users")
 public interface IUserService extends RestService {
 	
 	@POST
