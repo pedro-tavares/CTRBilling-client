@@ -23,13 +23,13 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.javalabs.client.ui.CenterPanel;
-import com.javalabs.client.ui.TestbedPanel;
+import com.javalabs.client.ui.LoginPanel;
 
 public class JavaLabs implements EntryPoint {
 	
 	@Override
 	public void onModuleLoad() {
-//		addAuthHeaders();
+		addAuthHeaders();
 		createUI();
 	}
 
@@ -65,8 +65,8 @@ public class JavaLabs implements EntryPoint {
 		HorizontalPanel topPanel = new HorizontalPanel();
 		topPanel.setStyleName("topPanel");
 		//Image logoImg = new Image("images/JavaLabs_Logo.jpg");
-		Image logoImg = new Image("images/Spiro_Logo.jpg");
-		logoImg.setPixelSize(250, 75);
+		Image logoImg = new Image("images/Spiro_Logo.png");
+		logoImg.setPixelSize(199, 75);
 		topPanel.add(logoImg);
 		RootPanel.get().add(topPanel, 0, 0);
 		
@@ -95,9 +95,9 @@ public class JavaLabs implements EntryPoint {
 		CenterPanel centerPanel = new CenterPanel();
 		RootPanel.get().add(centerPanel, 0, 150);
 /*		
-		TestbedPanel testbedPanel = new TestbedPanel();
-		centerPanel.add(testbedPanel);
-*/		
+		LoginPanel loginPanel = new LoginPanel();
+		centerPanel.add(loginPanel);	
+*/
 	}
 	
 	private void resize() {

@@ -23,7 +23,7 @@ import com.javalabs.IUIConstants;
 import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.User;
 
-public class TestbedPanel extends VerticalPanel {
+public class LoginPanel extends VerticalPanel {
 	
 	private Button saveButton, dialogCloseButton, searchButton, loadAllButton;
 	private Label nameLbl, emailLbl, passwordLbl, reenterPasswordLbl, searchNameLbl, textToServerLbl, errorLbl;
@@ -32,7 +32,7 @@ public class TestbedPanel extends VerticalPanel {
 	private HTML serverResponseLabel;
 	private DialogBox dialogBox;
 
-	public TestbedPanel() {
+	public LoginPanel() {
 		this.setStyleName("centerPanels");
 		this.setSpacing(5);
 		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
