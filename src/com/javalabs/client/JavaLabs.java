@@ -64,8 +64,9 @@ public class JavaLabs implements EntryPoint {
 		
 		HorizontalPanel topPanel = new HorizontalPanel();
 		topPanel.setStyleName("topPanel");
-		Image logoImg = new Image("images/JavaLabs_Logo.jpg");
-		logoImg.setSize("200", "40");
+		//Image logoImg = new Image("images/JavaLabs_Logo.jpg");
+		Image logoImg = new Image("images/Spiro_Logo.jpg");
+		logoImg.setPixelSize(250, 75);
 		topPanel.add(logoImg);
 		RootPanel.get().add(topPanel, 0, 0);
 		
