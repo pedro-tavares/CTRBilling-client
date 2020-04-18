@@ -3,7 +3,10 @@
 /war/WEB-INF/classes
 /war/WEB-INF/deploy
 !.mvn/wrapper/maven-wrapper.jar
+/war/spiro/compilation-mappings.txt
+*.devmode.js
 *.cache.js
+*.nocache.js
 
 ### STS ###
 .apt_generated
