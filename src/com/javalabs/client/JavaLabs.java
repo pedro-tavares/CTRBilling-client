@@ -26,6 +26,9 @@ import com.javalabs.client.ui.CenterPanel;
 import com.javalabs.client.ui.LoginPanel;
 
 public class JavaLabs implements EntryPoint {
+
+	private static CenterPanel centerPanel = new CenterPanel();
+	private static LoginPanel loginPanel = new LoginPanel();
 	
 	@Override
 	public void onModuleLoad() {
@@ -92,14 +95,15 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private void createCenterPanel() {
-		CenterPanel centerPanel = new CenterPanel();
 		RootPanel.get().add(centerPanel, 0, 150);
-		
-		LoginPanel loginPanel = new LoginPanel();
 		centerPanel.add(loginPanel);	
 
 	}
 	
 	private void resize() {
+	}
+	
+	public static void letsGo() {
+		centerPanel.remove(loginPanel);
 	}
 }

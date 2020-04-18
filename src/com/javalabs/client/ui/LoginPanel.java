@@ -1,5 +1,6 @@
 package com.javalabs.client.ui;
 
+import org.eclipse.jetty.util.log.Log;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
@@ -16,6 +17,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.javalabs.client.JavaLabs;
 import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.User;
 
@@ -161,10 +163,15 @@ public class LoginPanel extends VerticalPanel {
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				serverResponseLabel.removeStyleName("errorLbl");
+				/*
 				showDialogBox("Login  - SUCCESS", 
 					"User name: " + response.getName() + 
 					", User email: " + response.getEmail() + 
-					", ID: " + response.getId());
+					", ID: " + response.getId()
+				);
+				*/
+				
+				JavaLabs.letsGo();
 			}
 
 			@Override
