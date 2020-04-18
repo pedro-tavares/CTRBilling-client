@@ -124,7 +124,7 @@ public class LoginPanel extends VerticalPanel {
 		VerticalPanel dialogVPanel = new VerticalPanel();
 		dialogVPanel.addStyleName("dialogVPanel");
 
-		dialogVPanel.add(new HTML("<b>Login via email to the server:</b>"));
+		dialogVPanel.add(new HTML("<b>Login via email:</b>"));
 		dialogVPanel.add(textToServerLbl);
 
 		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
@@ -177,7 +177,7 @@ public class LoginPanel extends VerticalPanel {
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				serverResponseLabel.addStyleName("errorLbl");
-				showDialogBox("Login  - FAILURE", IUIConstants.SERVER_ERROR);
+				showDialogBox("Login  - FAILURE", method.getResponse().getText());
 			}
 		});
 	}
