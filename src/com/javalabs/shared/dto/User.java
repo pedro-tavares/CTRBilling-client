@@ -8,7 +8,7 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@QueryParam("name")
+	@QueryParam("id")
 	private Long id;
 	@QueryParam("name")
 	private String name;

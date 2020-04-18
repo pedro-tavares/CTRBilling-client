@@ -6,7 +6,7 @@
 /war/spiro/compilation-mappings.txt
 *.devmode.js
 *.cache.js
-*.nocache.js
+/war/spiro/spiro.nocache.js
 
 ### STS ###
 .apt_generated

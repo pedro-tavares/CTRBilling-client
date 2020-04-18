@@ -25,10 +25,22 @@ import com.javalabs.shared.dto.User;
 
 public class LoginPanel extends VerticalPanel {
 	
-	private Button saveButton, dialogCloseButton, searchButton, loadAllButton;
-	private Label nameLbl, emailLbl, passwordLbl, reenterPasswordLbl, searchNameLbl, textToServerLbl, errorLbl;
-	private TextBox nameField, emailField, searchField;
-	private PasswordTextBox passwordField, reenterPasswordField;
+	private Button 
+		loginButton, 
+		dialogCloseButton;
+	private Label 
+		//nameLbl, 
+		emailLbl, 
+		passwordLbl, 
+		reenterPasswordLbl, 
+		textToServerLbl, 
+		errorLbl;
+	private TextBox 
+		//nameField, 
+		emailField;
+	private PasswordTextBox 
+		passwordField, 
+		reenterPasswordField;
 	private HTML serverResponseLabel;
 	private DialogBox dialogBox;
 
@@ -38,13 +50,13 @@ public class LoginPanel extends VerticalPanel {
 		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		this.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		
-		nameLbl = new Label("Enter Name:");
-		nameField = new TextBox();
+		//nameLbl = new Label("Enter Name:");
+		//nameField = new TextBox();
 
-		emailLbl = new Label("Enter Email:");
+		emailLbl = new Label("Email:");
 		emailField = new TextBox();
 
-		passwordLbl = new Label("Enter Password:");
+		passwordLbl = new Label("Password:");
 		passwordField = new PasswordTextBox();
 		passwordField.addFocusHandler(
 			new FocusHandler() {
@@ -64,27 +76,18 @@ public class LoginPanel extends VerticalPanel {
 				}
 			});
 		
-		saveButton = new Button("Save");
+		loginButton = new Button("Login");
 
-		searchNameLbl = new Label("Enter Search Email:");
-		searchField = new TextBox();
-		searchButton = new Button("Search");
-
-		loadAllButton = new Button("Load All");
-
-		nameField.setFocus(true);
-		nameField.selectAll();
+		emailField.setFocus(true);
+		emailField.selectAll();
 		
 		errorLbl = new Label();
 		errorLbl.setStyleName("errorLbl");
 
 		createDialogBox();
 
-		saveButton.addClickHandler(event -> {
-			if (nameField.getText().equals("")) {
-				errorLbl.setText("Name cannot be empty!");
-			}
-			else if (emailField.getText().equals("")) {
+		loginButton.addClickHandler(event -> {
+			if (emailField.getText().equals("")) {
 				errorLbl.setText("Email cannot be empty!");
 			}
 			else if (passwordField.getText().equals("")) {
@@ -93,26 +96,18 @@ public class LoginPanel extends VerticalPanel {
 			else if (!passwordField.getText().equals(reenterPasswordField.getText())) {
 				errorLbl.setText("Passwords must match!");
 			} else {
-				textToServerLbl.setText(nameField.getText());
-				callSaveService();
+				textToServerLbl.setText(emailField.getText());
+				callLoginService();
 			}
 		});
 
-		loadAllButton.addClickHandler(event -> callLoadService());
-		
-		this.add(nameLbl);
-		this.add(nameField);
 		this.add(emailLbl);
 		this.add(emailField);
 		this.add(passwordLbl);
 		this.add(passwordField);
 		this.add(reenterPasswordLbl);
 		this.add(reenterPasswordField);		
-		this.add(saveButton);
-		this.add(searchNameLbl);
-		this.add(searchField);
-		this.add(searchButton);
-		this.add(loadAllButton);
+		this.add(loginButton);
 		this.add(errorLbl);
 	}
 	
@@ -129,7 +124,7 @@ public class LoginPanel extends VerticalPanel {
 		VerticalPanel dialogVPanel = new VerticalPanel();
 		dialogVPanel.addStyleName("dialogVPanel");
 
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
+		dialogVPanel.add(new HTML("<b>Login via email to the server:</b>"));
 		dialogVPanel.add(textToServerLbl);
 
 		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
@@ -141,8 +136,8 @@ public class LoginPanel extends VerticalPanel {
 
 		dialogCloseButton.addClickHandler(event -> {
 			dialogBox.hide();
-			saveButton.setEnabled(true);
-			saveButton.setFocus(true);
+			loginButton.setEnabled(true);
+			loginButton.setFocus(true);
 		});
 	}
 	
@@ -153,24 +148,24 @@ public class LoginPanel extends VerticalPanel {
 		dialogCloseButton.setFocus(true);
 	}
 
-	private void callSaveService() {
-		saveButton.getElement().getStyle().setCursor(Cursor.WAIT);
+	private void callLoginService() {
+		loginButton.getElement().getStyle().setCursor(Cursor.WAIT);
 		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
 		
 		User user = new User();
-		user.setName(nameField.getText());
+		user.setName("");
 		user.setEmail(emailField.getText());
 		user.setPassword(passwordField.getText());
 		
-		ServiceFactory.USER_SERVICE.saveUser(user, new MethodCallback<User>() {
+		ServiceFactory.USER_SERVICE.login(user, new MethodCallback<User>() {
 
 			@Override
 			public void onSuccess(Method method, User response) {
-				saveButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				loginButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				serverResponseLabel.removeStyleName("errorLbl");
-				showDialogBox("REST endpoint call", 
+				showDialogBox("Login  - SUCCESS", 
 					"User name: " + response.getName() + 
 					", User email: " + response.getEmail() + 
 					", ID: " + response.getId());
@@ -178,15 +173,16 @@ public class LoginPanel extends VerticalPanel {
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				saveButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				loginButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				serverResponseLabel.addStyleName("errorLbl");
-				showDialogBox("REST endpoint call - Failure", IUIConstants.SERVER_ERROR);
+				showDialogBox("Login  - FAILURE", IUIConstants.SERVER_ERROR);
 			}
 		});
 	}
-	
+
+/*	
 	private void callLoadService() {
 		loadAllButton.getElement().getStyle().setCursor(Cursor.WAIT);
 		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
@@ -219,5 +215,5 @@ public class LoginPanel extends VerticalPanel {
 			}
 		});
 	}
-	
+*/	
 }

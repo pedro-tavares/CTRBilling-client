@@ -12,14 +12,19 @@ import org.fusesource.restygwt.client.RestService;
 
 import com.javalabs.shared.dto.User;
 
-@Path("http://localhost:8088" + "/users")
+@Path("http://localhost:8088" + "/user")
 public interface IUserService extends RestService {
+
+	@POST
+	@Path("/login")
+	public void login(@BeanParam User user, MethodCallback<User> callback);
 	
 	@POST
-	@Path("/addUser")
-	public void saveUser(@BeanParam User user, MethodCallback<User> callback);
+	@Path("/save")
+	public void save(@BeanParam User user, MethodCallback<User> callback);
 
 	@GET
-	@Path("/getAllUsers")
-	public void getAllUsers(MethodCallback<List<User>> callback);
+	@Path("/getAll")
+	public void getAll(MethodCallback<List<User>> callback);
+	
 }

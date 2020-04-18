@@ -94,10 +94,10 @@ public class JavaLabs implements EntryPoint {
 	private void createCenterPanel() {
 		CenterPanel centerPanel = new CenterPanel();
 		RootPanel.get().add(centerPanel, 0, 150);
-/*		
+		
 		LoginPanel loginPanel = new LoginPanel();
 		centerPanel.add(loginPanel);	
-*/
+
 	}
 	
 	private void resize() {
