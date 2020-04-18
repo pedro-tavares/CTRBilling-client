@@ -7,6 +7,9 @@ import org.fusesource.restygwt.client.MethodCallback;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.json.client.JSONObject;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
@@ -180,7 +183,12 @@ public class LoginPanel extends VerticalPanel {
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				serverResponseLabel.addStyleName("errorLbl");
-				showDialogBox("Login  - FAILURE", method.getResponse().getText());
+				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
+				
+				JSONValue responseValue = JSONParser.parse(method.getResponse().getText());
+		        JSONObject responseObj = responseValue.isObject();
+		        
+		        errorLbl.setText(responseObj.get("message").isString().stringValue());
 			}
 		});
 	}
