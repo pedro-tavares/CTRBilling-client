@@ -1,8 +1,5 @@
 package com.javalabs.client.ui;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
@@ -19,7 +16,6 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.javalabs.IUIConstants;
 import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.User;
 
