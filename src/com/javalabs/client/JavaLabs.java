@@ -29,6 +29,8 @@ public class JavaLabs implements EntryPoint {
 
 	private static CenterPanel centerPanel = new CenterPanel();
 	private static LoginPanel loginPanel = new LoginPanel();
+	private static Image centerImg;
+	private static HorizontalPanel topPanel;
 	
 	@Override
 	public void onModuleLoad() {
@@ -61,11 +63,11 @@ public class JavaLabs implements EntryPoint {
 	
 	private void createUI() {
 				
-		Image centerImg = new Image("images/background.png");
+		centerImg = new Image("images/background.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);
 		
-		HorizontalPanel topPanel = new HorizontalPanel();
+		topPanel = new HorizontalPanel();
 		topPanel.setStyleName("topPanel");
 		//Image logoImg = new Image("images/JavaLabs_Logo.jpg");
 		Image logoImg = new Image("images/Spiro_Logo.png");
@@ -105,5 +107,14 @@ public class JavaLabs implements EntryPoint {
 	
 	public static void letsGo() {
 		centerPanel.remove(loginPanel);
+
+		centerImg.removeFromParent();
+		centerImg = new Image("images/background_greyscale.png");
+		centerImg.setStyleName("centerImg");
+		RootPanel.get().add(centerImg, 0, 0);
+
+		topPanel.removeFromParent();
+		RootPanel.get().add(topPanel, 0, 0);
+		
 	}
 }

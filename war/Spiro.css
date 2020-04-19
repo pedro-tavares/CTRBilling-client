@@ -49,6 +49,7 @@ button.gwt-Button[disabled] {
 	width: 100%;
 	background-color: white;
 	border-bottom: 1px solid grey;
+	z-index: 1;
 }
 
 .centerPanel {
@@ -64,7 +65,7 @@ button.gwt-Button[disabled] {
 	background-color: darkgrey;
 	font-weight: bold;
 	opacity: 0.75;
-  	filter: alpha(opacity=75); /* For IE8 and earlier */
+  	filter: alpha(opacity=75); 
 }
 
 .centerPanels {
