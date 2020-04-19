@@ -41,31 +41,7 @@ public class JavaLabs implements EntryPoint {
 	
 	@Override
 	public void onModuleLoad() {
-		addAuthHeaders();
 		createUI();
-	}
-
-	private void addAuthHeaders() {
-		Defaults.setDispatcher(new DefaultFilterawareDispatcher(new DispatcherFilter() {
-
-			@Override
-			public boolean filter(Method method, RequestBuilder builder) {
-				try {
-					String basicAuthHeaderValue = createBasicAuthHeader("user", "user");
-					builder.setHeader("Authorization", basicAuthHeaderValue);
-				} catch (UnsupportedEncodingException e) {
-					return false;
-				}
-				return true;
-			}
-
-			private String createBasicAuthHeader(String userName, String password) throws UnsupportedEncodingException {
-				String credentials = userName + ":" + password;
-				String encodedCredentials = new String(Base64.encode(credentials.getBytes()), "UTF-8");
-				return "Basic " + encodedCredentials;
-			}
-		}));
-
 	}
 	
 	private void createUI() {
