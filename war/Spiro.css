@@ -53,6 +53,10 @@ button.gwt-Button[disabled] {
 	padding-right: 10px;
 }
 
+.loginPanel {
+	z-index: 1;
+}
+
 .centerPanel {
 	width: 100%;
 	height: 100%;
@@ -89,7 +93,7 @@ button.gwt-Button[disabled] {
 	height: 100%;
 	opacity: 0.50;
   	filter: alpha(opacity=50);
-  	z-index: 0;
+  	z-index: -1;
 }
 
 .loggedinPanel {

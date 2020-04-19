@@ -35,6 +35,7 @@ public class JavaLabs implements EntryPoint {
 	private static LoginPanel loginPanel = new LoginPanel();
 	private static Image centerImg;
 	private static HorizontalPanel topPanel;
+	private static LoggedinPanel loggedinPanel;
 	
 	@Override
 	public void onModuleLoad() {
@@ -78,6 +79,8 @@ public class JavaLabs implements EntryPoint {
 		logoImg.setPixelSize(199, 75);
 		topPanel.add(logoImg);
 		RootPanel.get().add(topPanel, 0, 0);
+
+		loginPanel.setStyleName("loginPanel");
 		
 		resize();
 		
@@ -95,7 +98,7 @@ public class JavaLabs implements EntryPoint {
 			    resizeTimer.cancel();
 			    resizeTimer.schedule(10);
 			  }
-			});
+		});
 		
 		createCenterPanel();
 	}
@@ -123,8 +126,21 @@ public class JavaLabs implements EntryPoint {
 		topPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		RootPanel.get().add(topPanel, 0, 0);
 		
-		LoggedinPanel loggedinPanel = new LoggedinPanel(user);
+		loggedinPanel = new LoggedinPanel(user);
 		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		topPanel.add(loggedinPanel);
 	}
+	
+	public static void logOut() {
+		centerImg.removeFromParent();
+		centerImg = new Image("images/background.png");
+		centerImg.setStyleName("centerImg");
+		RootPanel.get().add(centerImg, 0, 0);		
+		
+		loginPanel.clear();
+		
+		topPanel.remove(loggedinPanel);
+		centerPanel.add(loginPanel);		
+	}
+	
 }

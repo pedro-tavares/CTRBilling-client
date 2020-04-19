@@ -110,6 +110,10 @@ public class LoginPanel extends VerticalPanel {
 		this.add(loginButton);
 		this.add(errorLbl);
 	}
+
+	public void clear() {
+		reenterPasswordField.setText("");
+	}
 	
 	private void createDialogBox() {
 		dialogBox = new DialogBox();
