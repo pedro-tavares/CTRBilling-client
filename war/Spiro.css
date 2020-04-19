@@ -93,6 +93,7 @@ button.gwt-Button[disabled] {
 }
 
 .loggedinPanel {
+	border-spacing: 10px;
 }
 .loggedinLabel {
 	font-weight: bold;

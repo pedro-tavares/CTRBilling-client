@@ -124,9 +124,7 @@ public class JavaLabs implements EntryPoint {
 		RootPanel.get().add(topPanel, 0, 0);
 		
 		LoggedinPanel loggedinPanel = new LoggedinPanel(user);
-		loggedinPanel.setStyleName("loggedinPanel");
 		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-		loggedinPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		topPanel.add(loggedinPanel);
 	}
 }
