@@ -1,6 +1,5 @@
 package com.javalabs.client.ui;
 
-import org.eclipse.jetty.util.log.Log;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
@@ -174,7 +173,7 @@ public class LoginPanel extends VerticalPanel {
 				);
 				*/
 				
-				JavaLabs.letsGo();
+				JavaLabs.letsGo(response);
 			}
 
 			@Override

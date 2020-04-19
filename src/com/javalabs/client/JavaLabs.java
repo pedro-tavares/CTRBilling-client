@@ -23,10 +23,14 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.javalabs.client.ui.CenterPanel;
+import com.javalabs.client.ui.LoggedinPanel;
 import com.javalabs.client.ui.LoginPanel;
+import com.javalabs.shared.dto.User;
 
 public class JavaLabs implements EntryPoint {
 
+	private static User user;
+	
 	private static CenterPanel centerPanel = new CenterPanel();
 	private static LoginPanel loginPanel = new LoginPanel();
 	private static Image centerImg;
@@ -105,7 +109,7 @@ public class JavaLabs implements EntryPoint {
 	private void resize() {
 	}
 	
-	public static void letsGo() {
+	public static void letsGo(User user) {
 		centerPanel.remove(loginPanel);
 
 		centerImg.removeFromParent();
@@ -114,7 +118,15 @@ public class JavaLabs implements EntryPoint {
 		RootPanel.get().add(centerImg, 0, 0);
 
 		topPanel.removeFromParent();
+		topPanel.setStyleName("topPanel");
+		topPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+		topPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		RootPanel.get().add(topPanel, 0, 0);
 		
+		LoggedinPanel loggedinPanel = new LoggedinPanel(user);
+		loggedinPanel.setStyleName("loggedinPanel");
+		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+		loggedinPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		topPanel.add(loggedinPanel);
 	}
 }

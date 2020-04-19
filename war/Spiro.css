@@ -50,6 +50,7 @@ button.gwt-Button[disabled] {
 	background-color: white;
 	border-bottom: 1px solid grey;
 	z-index: 1;
+	padding-right: 10px;
 }
 
 .centerPanel {
@@ -91,14 +92,9 @@ button.gwt-Button[disabled] {
   	z-index: 0;
 }
 
-.presentation1Lbl {
-	color: white;
-	font-size: 20px;
+.loggedinPanel {
+}
+.loggedinLabel {
 	font-weight: bold;
 }
 
-.presentation2Lbl {
-	color: white;
-	font-size: 15px;
-	font-weight: bold;
-}
