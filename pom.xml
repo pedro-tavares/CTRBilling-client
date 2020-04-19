@@ -94,6 +94,18 @@
 		</dependency>
 
 		<dependency>
+	        <groupId>javax.xml.bind</groupId>
+	        <artifactId>jaxb-api</artifactId>
+	        <version>2.3.1</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.glassfish.jaxb</groupId>
+	        <artifactId>jaxb-runtime</artifactId>
+	        <version>2.3.1</version>
+	        <scope>runtime</scope>
+	    </dependency>
+    
+		<dependency>
 			<groupId>com.googlecode.gwt-crypto</groupId>
 			<artifactId>gwt-crypto</artifactId>
 			<version>2.3.0</version>
