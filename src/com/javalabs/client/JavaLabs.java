@@ -1,6 +1,7 @@
 package com.javalabs.client;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import org.fusesource.restygwt.client.Defaults;
 import org.fusesource.restygwt.client.Method;
@@ -11,6 +12,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
@@ -105,14 +107,26 @@ public class JavaLabs implements EntryPoint {
 	
 	private void createCenterPanel() {
 		RootPanel.get().add(centerPanel, 0, 150);
-		centerPanel.add(loginPanel);	
+		
+		String userEmail = getCookie();
+		if (userEmail != null) {
+			user = new User();
+			user.setEmail(userEmail);
+			letsGo(user);
+			
+		} else {
+			centerPanel.add(loginPanel);
+		}
 
 	}
 	
 	private void resize() {
 	}
 	
-	public static void letsGo(User user) {
+	public static void letsGo(User userLetsGo) {
+		user = userLetsGo;
+		setCookie();
+		
 		centerPanel.remove(loginPanel);
 
 		centerImg.removeFromParent();
@@ -132,6 +146,8 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	public static void logOut() {
+		deleteCookie();
+		
 		centerImg.removeFromParent();
 		centerImg = new Image("images/background.png");
 		centerImg.setStyleName("centerImg");
@@ -143,4 +159,25 @@ public class JavaLabs implements EntryPoint {
 		centerPanel.add(loginPanel);		
 	}
 	
+	private static void setCookie() {
+		if (Cookies.isCookieEnabled()) {
+			final long DURATION = 1000 * 60 * 60 * 24 * 7; //duration remembering login - 1 week
+			Date expires = new Date(System.currentTimeMillis() + DURATION);
+	
+			Cookies.setCookie("SPIRO", user.getEmail(), expires, null, "/", false);
+		}
+	}
+	
+	private static String getCookie() {
+		if (Cookies.isCookieEnabled()) {
+			return Cookies.getCookie("SPIRO");
+		}
+		return null;
+	}
+	
+	private static void deleteCookie() {
+		if (Cookies.isCookieEnabled()) {
+			Cookies.removeCookie("SPIRO");
+		}
+	}
 }
