@@ -37,6 +37,7 @@ public class JavaLabs implements EntryPoint {
 	private static CenterPanel centerPanel = new CenterPanel();
 	private static LoginPanel loginPanel = new LoginPanel();
 	private static Image centerImg;
+	private static Image loginImg;
 	private static HorizontalPanel topPanel;
 	private static LoggedinPanel loggedinPanel;
 	
@@ -58,10 +59,13 @@ public class JavaLabs implements EntryPoint {
 		
 		//Image logoImg = new Image("images/JavaLabs_Logo.jpg");
 		Image logoImg = new Image("images/Spiro_Logo.png");
+		logoImg.setStyleName("logoImg");
 		logoImg.setPixelSize(199, 75);
-		topPanel.add(logoImg);
+		
 		RootPanel.get().add(topPanel, 0, 0);
-
+		topPanel.add(logoImg);
+		topPanel.setCellHorizontalAlignment(logoImg, HasHorizontalAlignment.ALIGN_LEFT);
+		
 		loginPanel.setStyleName("loginPanel");
 		
 		resize();
@@ -86,6 +90,11 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private void createCenterPanel() {
+		loginImg = new Image("images/login.png");
+		loginImg.setPixelSize(600, 300);
+		topPanel.add(loginImg);
+		centerPanel.add(loginImg);
+
 		RootPanel.get().add(centerPanel, 0, 150);
 		
 		String userEmail = getCookie();
@@ -108,7 +117,8 @@ public class JavaLabs implements EntryPoint {
 		user = userLetsGo;
 		setCookie();
 		
-		centerPanel.remove(loginPanel);
+		loginImg.removeFromParent();
+		loginPanel.removeFromParent();
 
 		centerImg.removeFromParent();
 		centerImg = new Image("images/background_greyscale.png");
@@ -124,25 +134,30 @@ public class JavaLabs implements EntryPoint {
 		loggedinPanel = new LoggedinPanel(user);
 		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		topPanel.add(loggedinPanel);
-		
+/*		
 		MenuStackPanel menuPanel = new MenuStackPanel();
 		menuPanel.setStyleName("menuPanel");
 		RootPanel.get().add(menuPanel, 0, 0);
-		
+*/		
 	}
 	
 	public static void logOut() {
 		deleteCookie();
 		
 		centerImg.removeFromParent();
-		centerImg = new Image("images/background.png");
+		centerImg = new Image("images/background_greyscale.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);		
+		
+		loginImg = new Image("images/login.png");
+		loginImg.setPixelSize(600, 300);
+		topPanel.add(loginImg);
+		centerPanel.add(loginImg);
 		
 		loginPanel.clear();
 		
 		topPanel.remove(loggedinPanel);
-		centerPanel.add(loginPanel);		
+		topPanel.add(loginPanel);		
 	}
 	
 	private static void setCookie() {
