@@ -53,6 +53,9 @@ public class JavaLabs implements EntryPoint {
 		
 		topPanel = new HorizontalPanel();
 		topPanel.setStyleName("topPanel");
+		topPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+		topPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		
 		//Image logoImg = new Image("images/JavaLabs_Logo.jpg");
 		Image logoImg = new Image("images/Spiro_Logo.png");
 		logoImg.setPixelSize(199, 75);
@@ -92,7 +95,8 @@ public class JavaLabs implements EntryPoint {
 			letsGo(user);
 			
 		} else {
-			centerPanel.add(loginPanel);
+			//centerPanel.add(loginPanel);
+			topPanel.add(loginPanel);
 		}
 
 	}

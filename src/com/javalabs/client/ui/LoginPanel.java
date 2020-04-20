@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -23,7 +24,7 @@ import com.javalabs.client.JavaLabs;
 import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.User;
 
-public class LoginPanel extends VerticalPanel {
+public class LoginPanel extends HorizontalPanel {
 	
 	private Button 
 		loginButton, 
