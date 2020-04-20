@@ -51,7 +51,7 @@ public class JavaLabs implements EntryPoint {
 		//centerImg = new Image("images/background_greyscale.png");
 		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
-		RootPanel.get().add(centerImg, 0, 0);
+		RootPanel.get().add(centerImg, 0, 150);
 		
 		topPanel = new HorizontalPanel();
 		topPanel.setStyleName("topPanel");
