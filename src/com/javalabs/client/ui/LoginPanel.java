@@ -32,15 +32,16 @@ public class LoginPanel extends VerticalPanel {
 		//nameLbl, 
 		emailLbl, 
 		passwordLbl, 
-		reenterPasswordLbl, 
+		//reenterPasswordLbl, 
 		textToServerLbl, 
 		errorLbl;
 	private TextBox 
 		//nameField, 
 		emailField;
 	private PasswordTextBox 
-		passwordField, 
-		reenterPasswordField;
+		passwordField/*, 
+		reenterPasswordField*/
+		;
 	private HTML serverResponseLabel;
 	private DialogBox dialogBox;
 
@@ -65,7 +66,7 @@ public class LoginPanel extends VerticalPanel {
 					errorLbl.setText("");
 			    }
 			});
-
+/*
 		reenterPasswordLbl = new Label("Renter Password:");
 		reenterPasswordField = new PasswordTextBox();
 		reenterPasswordField.addFocusHandler(
@@ -75,7 +76,7 @@ public class LoginPanel extends VerticalPanel {
 					errorLbl.setText("");
 				}
 			});
-		
+*/
 		loginButton = new Button("Login");
 
 		emailField.setFocus(true);
@@ -93,9 +94,12 @@ public class LoginPanel extends VerticalPanel {
 			else if (passwordField.getText().equals("")) {
 				errorLbl.setText("Password cannot be empty!");
 			}
+/*			
 			else if (!passwordField.getText().equals(reenterPasswordField.getText())) {
 				errorLbl.setText("Passwords must match!");
-			} else {
+			} 
+*/			
+			else {
 				textToServerLbl.setText(emailField.getText());
 				callLoginService();
 			}
@@ -105,14 +109,14 @@ public class LoginPanel extends VerticalPanel {
 		this.add(emailField);
 		this.add(passwordLbl);
 		this.add(passwordField);
-		this.add(reenterPasswordLbl);
-		this.add(reenterPasswordField);		
+//		this.add(reenterPasswordLbl);
+//		this.add(reenterPasswordField);		
 		this.add(loginButton);
 		this.add(errorLbl);
 	}
 
 	public void clear() {
-		reenterPasswordField.setText("");
+//		reenterPasswordField.setText("");
 	}
 	
 	private void createDialogBox() {
