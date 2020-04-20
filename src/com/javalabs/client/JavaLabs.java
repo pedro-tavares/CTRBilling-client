@@ -37,7 +37,7 @@ public class JavaLabs implements EntryPoint {
 	private static CenterPanel centerPanel = new CenterPanel();
 	private static LoginPanel loginPanel = new LoginPanel();
 	private static Image centerImg;
-	private static Image loginImg;
+	//private static Image loginImg;
 	private static HorizontalPanel topPanel;
 	private static LoggedinPanel loggedinPanel;
 	
@@ -48,7 +48,8 @@ public class JavaLabs implements EntryPoint {
 	
 	private void createUI() {
 				
-		centerImg = new Image("images/background_greyscale.png");
+		//centerImg = new Image("images/background_greyscale.png");
+		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);
 		
@@ -90,10 +91,6 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private void createCenterPanel() {
-		loginImg = new Image("images/login.png");
-		loginImg.setPixelSize(600, 300);
-		topPanel.add(loginImg);
-		centerPanel.add(loginImg);
 
 		RootPanel.get().add(centerPanel, 0, 150);
 		
@@ -117,11 +114,11 @@ public class JavaLabs implements EntryPoint {
 		user = userLetsGo;
 		setCookie();
 		
-		loginImg.removeFromParent();
 		loginPanel.removeFromParent();
 
 		centerImg.removeFromParent();
-		centerImg = new Image("images/background_greyscale.png");
+		//centerImg = new Image("images/background_greyscale.png");
+		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);
 
@@ -145,14 +142,10 @@ public class JavaLabs implements EntryPoint {
 		deleteCookie();
 		
 		centerImg.removeFromParent();
-		centerImg = new Image("images/background_greyscale.png");
+		//centerImg = new Image("images/background_greyscale.png");
+		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);		
-		
-		loginImg = new Image("images/login.png");
-		loginImg.setPixelSize(600, 300);
-		topPanel.add(loginImg);
-		centerPanel.add(loginImg);
 		
 		loginPanel.clear();
 		
