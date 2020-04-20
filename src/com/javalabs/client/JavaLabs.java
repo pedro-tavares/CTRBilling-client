@@ -27,6 +27,7 @@ import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.javalabs.client.ui.CenterPanel;
 import com.javalabs.client.ui.LoggedinPanel;
 import com.javalabs.client.ui.LoginPanel;
+import com.javalabs.client.ui.MenuStackPanel;
 import com.javalabs.shared.dto.User;
 
 public class JavaLabs implements EntryPoint {
@@ -46,7 +47,7 @@ public class JavaLabs implements EntryPoint {
 	
 	private void createUI() {
 				
-		centerImg = new Image("images/background.png");
+		centerImg = new Image("images/background_greyscale.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 0);
 		
@@ -119,6 +120,11 @@ public class JavaLabs implements EntryPoint {
 		loggedinPanel = new LoggedinPanel(user);
 		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		topPanel.add(loggedinPanel);
+		
+		MenuStackPanel menuPanel = new MenuStackPanel();
+		menuPanel.setStyleName("menuPanel");
+		RootPanel.get().add(menuPanel, 0, 0);
+		
 	}
 	
 	public static void logOut() {
