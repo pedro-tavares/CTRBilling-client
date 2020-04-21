@@ -38,7 +38,9 @@ public class JavaLabs implements EntryPoint {
 	
 	private static CenterPanel centerPanel = new CenterPanel();
 	private static LoginPanel loginPanel = new LoginPanel();
-	private static Image centerImg;
+	private static Image 
+		centerImg,
+		centerImgLoggedIn;
 	//private static Image loginImg;
 	private static HorizontalPanel topPanel;
 	private static LoggedinPanel loggedinPanel;
@@ -77,19 +79,11 @@ public class JavaLabs implements EntryPoint {
 		resize();
 		
 		Window.addResizeHandler(new ResizeHandler() {
-			
-			  Timer resizeTimer = new Timer() {  
-			    @Override
-			    public void run() {
-			      resize();
-			    }
-			  };
 
-			  @Override
-			  public void onResize(ResizeEvent event) {
-			    resizeTimer.cancel();
-			    resizeTimer.schedule(10);
-			  }
+			@Override
+			public void onResize(ResizeEvent event) {
+				resize();				
+			}
 		});
 		
 		createCenterPanel();
@@ -112,7 +106,9 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private static void resize() {
-		menu.setPixelSize(200, Window.getClientHeight() - 75);
+		if (menu != null) {
+			menu.setPixelSize(200, Window.getClientHeight() - 75);
+		}
 	}
 	
 	public static void letsGo(User userLetsGo) {
@@ -122,9 +118,9 @@ public class JavaLabs implements EntryPoint {
 		loginPanel.removeFromParent();
 
 		centerImg.removeFromParent();
-		centerImg = new Image("images/login_greyscale.png");
-		centerImg.setStyleName("centerImg-loggedin");
-		RootPanel.get().add(centerImg, 201, 76);
+		centerImgLoggedIn = new Image("images/login_greyscale.png");
+		centerImgLoggedIn.setStyleName("centerImgLoggedin");
+		RootPanel.get().add(centerImgLoggedIn, 201, 76);
 
 		topPanel.removeFromParent();
 		topPanel.setStyleName("topPanel");
@@ -142,7 +138,7 @@ public class JavaLabs implements EntryPoint {
 	public static void logOut() {
 		deleteCookie();
 		
-		centerImg.removeFromParent();
+		centerImgLoggedIn.removeFromParent();
 		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 76);
