@@ -9,6 +9,7 @@ import org.fusesource.restygwt.client.dispatcher.DefaultFilterawareDispatcher;
 import org.fusesource.restygwt.client.dispatcher.DispatcherFilter;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.http.client.RequestBuilder;
@@ -16,18 +17,19 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.StackLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.javalabs.client.ui.CenterPanel;
 import com.javalabs.client.ui.LoggedinPanel;
 import com.javalabs.client.ui.LoginPanel;
-import com.javalabs.client.ui.MenuStackPanel;
 import com.javalabs.shared.dto.User;
 
 public class JavaLabs implements EntryPoint {
@@ -40,15 +42,17 @@ public class JavaLabs implements EntryPoint {
 	//private static Image loginImg;
 	private static HorizontalPanel topPanel;
 	private static LoggedinPanel loggedinPanel;
+	private static StackLayoutPanel menu;
 	
 	@Override
 	public void onModuleLoad() {
 		createUI();
+
+		doSTUFF();
 	}
 	
 	private void createUI() {
 				
-		//centerImg = new Image("images/background_greyscale.png");
 		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 76);
@@ -68,6 +72,7 @@ public class JavaLabs implements EntryPoint {
 		topPanel.setCellHorizontalAlignment(logoImg, HasHorizontalAlignment.ALIGN_LEFT);
 		
 		loginPanel.setStyleName("loginPanel");
+		topPanel.add(loginPanel);
 		
 		resize();
 		
@@ -101,13 +106,13 @@ public class JavaLabs implements EntryPoint {
 			letsGo(user);
 			
 		} else {
-			//centerPanel.add(loginPanel);
 			topPanel.add(loginPanel);
 		}
 
 	}
 	
-	private void resize() {
+	private static void resize() {
+		menu.setPixelSize(200, Window.getClientHeight() - 75);
 	}
 	
 	public static void letsGo(User userLetsGo) {
@@ -117,10 +122,9 @@ public class JavaLabs implements EntryPoint {
 		loginPanel.removeFromParent();
 
 		centerImg.removeFromParent();
-		//centerImg = new Image("images/background_greyscale.png");
-		centerImg = new Image("images/login.png");
-		centerImg.setStyleName("centerImg");
-		RootPanel.get().add(centerImg, 0, 0);
+		centerImg = new Image("images/login_greyscale.png");
+		centerImg.setStyleName("centerImg-loggedin");
+		RootPanel.get().add(centerImg, 201, 76);
 
 		topPanel.removeFromParent();
 		topPanel.setStyleName("topPanel");
@@ -131,21 +135,19 @@ public class JavaLabs implements EntryPoint {
 		loggedinPanel = new LoggedinPanel(user);
 		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		topPanel.add(loggedinPanel);
-/*		
-		MenuStackPanel menuPanel = new MenuStackPanel();
-		menuPanel.setStyleName("menuPanel");
-		RootPanel.get().add(menuPanel, 0, 0);
-*/		
+
+		doMenu();
 	}
 	
 	public static void logOut() {
 		deleteCookie();
 		
 		centerImg.removeFromParent();
-		//centerImg = new Image("images/background_greyscale.png");
 		centerImg = new Image("images/login.png");
 		centerImg.setStyleName("centerImg");
-		RootPanel.get().add(centerImg, 0, 0);		
+		RootPanel.get().add(centerImg, 0, 76);
+		
+		menu.removeFromParent();
 		
 		loginPanel.clear();
 		
@@ -173,5 +175,21 @@ public class JavaLabs implements EntryPoint {
 		if (Cookies.isCookieEnabled()) {
 			Cookies.removeCookie("SPIRO");
 		}
+	}
+	
+	private static void doMenu() {
+		 menu = new StackLayoutPanel(Unit.EM);   
+		 menu.add(new HTML("First"), new HTML("[this]"), 4);   
+		 menu.add(new HTML("Second"), new HTML("[that]"), 4);  
+		 menu.add(new HTML("Many more"), new HTML("[Many more]"), 4);
+		 
+		 RootPanel.get().add(menu, 0, 76);
+		 
+		 resize();
+	}
+	
+	// EXPERIMENTS *************************************************************************************************
+	private void doSTUFF() {
+		
 	}
 }

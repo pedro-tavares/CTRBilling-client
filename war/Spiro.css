@@ -98,6 +98,14 @@ button.gwt-Button[disabled] {
   	z-index: -1;
 }
 
+.centerImg-loggedin {
+	width: 100%;
+	height: 100%;
+  	z-index: -1;
+	opacity: 0.50;
+  	filter: alpha(opacity=50);
+}
+
 .loggedinPanel {
 	border-spacing: 10px;
 }
