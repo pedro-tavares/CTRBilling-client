@@ -49,6 +49,8 @@ public class JavaLabs implements EntryPoint {
 	private static LoggedinPanel loggedinPanel;
 	private static MenuPanel menuPanel;
 	
+	private static Panel lastViewPanel;
+	
 	@Override
 	public void onModuleLoad() {
 		INSTANCE = this;
@@ -154,8 +156,10 @@ public class JavaLabs implements EntryPoint {
 		
 		loginPanel.clear();
 		
+		lastViewPanel.removeFromParent();
+		
 		topPanel.remove(loggedinPanel);
-		topPanel.add(loginPanel);		
+		topPanel.add(loginPanel);				
 	}
 	
 	private static void setCookie() {
@@ -207,6 +211,7 @@ public class JavaLabs implements EntryPoint {
 		centerImgLoggedIn.removeFromParent();
 		
 		//Window.alert("showView:\n" + viewPanel.toString());
+		lastViewPanel = viewPanel;
 		viewPanel.setPixelSize(Window.getClientWidth()-200, Window.getClientHeight()-75);
 		RootPanel.get().add(viewPanel, 201, 76);		
 	}
