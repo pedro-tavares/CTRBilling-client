@@ -30,6 +30,7 @@ import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.javalabs.client.ui.CenterPanel;
 import com.javalabs.client.ui.LoggedinPanel;
 import com.javalabs.client.ui.LoginPanel;
+import com.javalabs.client.ui.MenuPanel;
 import com.javalabs.shared.dto.User;
 
 public class JavaLabs implements EntryPoint {
@@ -44,7 +45,7 @@ public class JavaLabs implements EntryPoint {
 	//private static Image loginImg;
 	private static HorizontalPanel topPanel;
 	private static LoggedinPanel loggedinPanel;
-	private static StackLayoutPanel menu;
+	private static MenuPanel menuPanel;
 	
 	@Override
 	public void onModuleLoad() {
@@ -106,8 +107,8 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private static void resize() {
-		if (menu != null) {
-			menu.setPixelSize(200, Window.getClientHeight() - 75);
+		if (menuPanel != null) {
+			menuPanel.setPixelSize(200, Window.getClientHeight() - 75);
 		}
 	}
 	
@@ -143,7 +144,7 @@ public class JavaLabs implements EntryPoint {
 		centerImg.setStyleName("centerImg");
 		RootPanel.get().add(centerImg, 0, 76);
 		
-		menu.removeFromParent();
+		menuPanel.removeFromParent();
 		
 		loginPanel.clear();
 		
@@ -174,12 +175,24 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private static void doMenu() {
-		 menu = new StackLayoutPanel(Unit.EM);   
-		 menu.add(new HTML("First"), new HTML("[this]"), 4);   
-		 menu.add(new HTML("Second"), new HTML("[that]"), 4);  
-		 menu.add(new HTML("Many more"), new HTML("[Many more]"), 4);
+		/*
+		 menuPanel = new StackLayoutPanel(Unit.EM);   
+		 menuPanel.add(new HTML("Dashboard"), new HTML("Dashboard"), 4);   
+		 menuPanel.add(new HTML("Customers"), new HTML("Customers"), 4);  
+		 menuPanel.add(new HTML("Telephone"), new HTML("Telephone"), 4);
+		 menuPanel.add(new HTML("Products"), new HTML("Products"), 4);
+		 menuPanel.add(new HTML("Products"), new HTML(""), 4);
+		 menuPanel.add(new HTML("Rate Scheme"), new HTML(""), 4);
+		 menuPanel.add(new HTML("Invoice Group"), new HTML(""), 4);
+		 menuPanel.add(new HTML("Invoice History"), new HTML(""), 4);
+		 menuPanel.add(new HTML("File History"), new HTML(""), 4);
+		 menuPanel.add(new HTML("Reports"), new HTML(""), 4);
+		 menuPanel.add(new HTML("File Upload"), new HTML(""), 4);
+		 */
 		 
-		 RootPanel.get().add(menu, 0, 76);
+		 menuPanel = new MenuPanel();
+		 
+		 RootPanel.get().add(menuPanel, 0, 76);
 		 
 		 resize();
 	}
