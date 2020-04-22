@@ -15,9 +15,8 @@ public class MenuPanel extends StackLayoutPanel {
 	public MenuPanel() {
 		super(Unit.EM);
 		
-		Hyperlink ftpTransferLink = new Hyperlink("FTP Transfer", "");
-		ftpTransferLink.addClickHandler(event -> {
-			Window.alert("FUCK");
+		Hyperlink ftpDownloadLink = new Hyperlink("FTP Download", "");
+		ftpDownloadLink.addClickHandler(event -> {
 			JavaLabs.GET().showView(fptTransferPanel);
 		});
 		
@@ -25,7 +24,7 @@ public class MenuPanel extends StackLayoutPanel {
 		this.add(new HTML("My Account  options"), new HTML("My Account"), 4);  
 		this.add(new HTML("Client options"), new HTML("Client"), 4);
 		this.add(new HTML("Billing options"), new HTML("Billing"), 4);
-		this.add(ftpTransferLink, new HTML("File Transfer FTP"), 4);
+		this.add(ftpDownloadLink, new HTML("FTP Transfer"), 4);
 		
 		//TODO
 		/*
