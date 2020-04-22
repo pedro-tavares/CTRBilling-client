@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -35,6 +36,7 @@ import com.javalabs.shared.dto.User;
 
 public class JavaLabs implements EntryPoint {
 
+	private static JavaLabs INSTANCE;
 	private static User user;
 	
 	private static CenterPanel centerPanel = new CenterPanel();
@@ -49,9 +51,13 @@ public class JavaLabs implements EntryPoint {
 	
 	@Override
 	public void onModuleLoad() {
+		INSTANCE = this;
 		createUI();
-
 		doSTUFF();
+	}
+
+	public static JavaLabs GET() {
+		return INSTANCE;
 	}
 	
 	private void createUI() {
@@ -195,6 +201,12 @@ public class JavaLabs implements EntryPoint {
 		 RootPanel.get().add(menuPanel, 0, 76);
 		 
 		 resize();
+	}
+
+	public void showView(Panel viewPanel) {
+		Window.alert("showView:\n" + viewPanel.toString());
+		
+		RootPanel.get().add(viewPanel, 201, 76);		
 	}
 	
 	// EXPERIMENTS *************************************************************************************************
