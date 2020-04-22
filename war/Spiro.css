@@ -114,6 +114,15 @@ button.gwt-Button[disabled] {
 	font-weight: bold;
 }
 
+.titledPanel {
+	background-color: white;	
+}
+
+.titledPanelLabel {
+	font-size: 25px;
+	font-weight: bold;
+}
+
 /*******************************************************************************************************************/
 .gwt-DecoratedStackPanel {
   border-bottom: 1px solid #bbbbbb;

@@ -204,8 +204,10 @@ public class JavaLabs implements EntryPoint {
 	}
 
 	public void showView(Panel viewPanel) {
-		Window.alert("showView:\n" + viewPanel.toString());
+		centerImgLoggedIn.removeFromParent();
 		
+		//Window.alert("showView:\n" + viewPanel.toString());
+		viewPanel.setPixelSize(Window.getClientWidth()-200, Window.getClientHeight()-75);
 		RootPanel.get().add(viewPanel, 201, 76);		
 	}
 	
