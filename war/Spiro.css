@@ -123,6 +123,10 @@ button.gwt-Button[disabled] {
 	font-weight: bold;
 }
 
+.listBoxServers {
+	overflow: hidden;	
+}
+
 /*******************************************************************************************************************/
 .gwt-DecoratedStackPanel {
   border-bottom: 1px solid #bbbbbb;
