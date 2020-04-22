@@ -37,7 +37,7 @@ import com.javalabs.shared.dto.User;
 public class JavaLabs implements EntryPoint {
 
 	private static JavaLabs INSTANCE;
-	private static User user;
+	private static User USER;
 	
 	private static CenterPanel centerPanel = new CenterPanel();
 	private static LoginPanel loginPanel = new LoginPanel();
@@ -102,9 +102,9 @@ public class JavaLabs implements EntryPoint {
 		
 		String userEmail = getCookie();
 		if (userEmail != null) {
-			user = new User();
-			user.setEmail(userEmail);
-			letsGo(user);
+			USER = new User();
+			USER.setEmail(userEmail);
+			letsGo(USER);
 			
 		} else {
 			topPanel.add(loginPanel);
@@ -119,7 +119,7 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	public static void letsGo(User userLetsGo) {
-		user = userLetsGo;
+		USER = userLetsGo;
 		setCookie();
 		
 		loginPanel.removeFromParent();
@@ -135,7 +135,7 @@ public class JavaLabs implements EntryPoint {
 		topPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		RootPanel.get().add(topPanel, 0, 0);
 		
-		loggedinPanel = new LoggedinPanel(user);
+		loggedinPanel = new LoggedinPanel(USER);
 		loggedinPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		topPanel.add(loggedinPanel);
 
@@ -163,7 +163,7 @@ public class JavaLabs implements EntryPoint {
 			final long DURATION = 1000 * 60 * 60 * 24 * 7; //duration remembering login - 1 week
 			Date expires = new Date(System.currentTimeMillis() + DURATION);
 	
-			Cookies.setCookie("SPIRO", user.getEmail(), expires, null, "/", false);
+			Cookies.setCookie("SPIRO", USER.getEmail(), expires, null, "/", false);
 		}
 	}
 	
