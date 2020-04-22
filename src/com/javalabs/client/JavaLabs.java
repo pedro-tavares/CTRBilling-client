@@ -153,10 +153,9 @@ public class JavaLabs implements EntryPoint {
 		RootPanel.get().add(centerImg, 0, 76);
 		
 		menuPanel.removeFromParent();
+		lastViewPanel.removeFromParent();
 		
 		loginPanel.clear();
-		
-		lastViewPanel.removeFromParent();
 		
 		topPanel.remove(loggedinPanel);
 		topPanel.add(loginPanel);				
@@ -185,23 +184,7 @@ public class JavaLabs implements EntryPoint {
 	}
 	
 	private static void doMenu() {
-		/*
-		 menuPanel = new StackLayoutPanel(Unit.EM);   
-		 menuPanel.add(new HTML("Dashboard"), new HTML("Dashboard"), 4);   
-		 menuPanel.add(new HTML("Customers"), new HTML("Customers"), 4);  
-		 menuPanel.add(new HTML("Telephone"), new HTML("Telephone"), 4);
-		 menuPanel.add(new HTML("Products"), new HTML("Products"), 4);
-		 menuPanel.add(new HTML("Products"), new HTML(""), 4);
-		 menuPanel.add(new HTML("Rate Scheme"), new HTML(""), 4);
-		 menuPanel.add(new HTML("Invoice Group"), new HTML(""), 4);
-		 menuPanel.add(new HTML("Invoice History"), new HTML(""), 4);
-		 menuPanel.add(new HTML("File History"), new HTML(""), 4);
-		 menuPanel.add(new HTML("Reports"), new HTML(""), 4);
-		 menuPanel.add(new HTML("File Upload"), new HTML(""), 4);
-		 */
-		 
-		 menuPanel = new MenuPanel();
-		 
+		 menuPanel = new MenuPanel();		 
 		 RootPanel.get().add(menuPanel, 0, 76);
 		 
 		 resize();
@@ -212,7 +195,7 @@ public class JavaLabs implements EntryPoint {
 		
 		//Window.alert("showView:\n" + viewPanel.toString());
 		lastViewPanel = viewPanel;
-		viewPanel.setPixelSize(Window.getClientWidth()-200, Window.getClientHeight()-75);
+		//viewPanel.setPixelSize(Window.getClientWidth()-200, Window.getClientHeight()-75);
 		RootPanel.get().add(viewPanel, 201, 76);		
 	}
 	
