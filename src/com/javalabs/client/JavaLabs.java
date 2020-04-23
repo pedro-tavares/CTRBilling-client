@@ -153,7 +153,9 @@ public class JavaLabs implements EntryPoint {
 		RootPanel.get().add(centerImg, 0, 76);
 		
 		menuPanel.removeFromParent();
-		lastViewPanel.removeFromParent();
+		if (lastViewPanel != null) {
+			lastViewPanel.removeFromParent();
+		}
 		
 		loginPanel.clear();
 		
