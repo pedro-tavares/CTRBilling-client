@@ -2,8 +2,8 @@ package com.javalabs;
 
 public interface IUIConstants {
 	
-	String SERVER = "localhost";
-	//String SERVER = "83.170.124.17";
+	//String SERVER = "localhost";
+	String SERVER = "83.170.124.17";
 	String PORT = "8088";
 
 	String SERVER_ERROR = 

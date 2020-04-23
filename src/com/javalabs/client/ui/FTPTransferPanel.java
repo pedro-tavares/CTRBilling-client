@@ -40,7 +40,7 @@ public class FTPTransferPanel extends TitledPanel {
 		
 		testConnectionButton = new Button("Test Connection");
 		testConnectionButton.addClickHandler(event -> {
-			//Window.alert("Test FOKING Connection:" + listBoxServers.getSelectedValue());
+			Window.alert("Test FOKING Connection:" + listBoxServers.getSelectedValue());
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
 			callFTPLoginService(server);
 		});
@@ -71,8 +71,8 @@ public class FTPTransferPanel extends TitledPanel {
 				//serverResponseLabel.addStyleName("errorLbl");
 				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
 				
-				JSONValue responseValue = JSONParser.parse(method.getResponse().getText());
-		        JSONObject responseObj = responseValue.isObject();
+				//JSONValue responseValue = JSONParser.parse(method.getResponse().getText());
+		        //JSONObject responseObj = responseValue.isObject();
 		        
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
 		        Window.alert("Login  - FAILURE:\n"  + method.getResponse().getText());
