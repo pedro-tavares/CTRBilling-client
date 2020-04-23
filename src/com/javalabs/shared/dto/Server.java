@@ -11,6 +11,8 @@ public class Server implements Serializable {
 	private int port;
 	private String username;
 	private String password;
+
+	public Server() {}
 	
 	public Server(String name, String ipAddress, int port, String username, String password) {
 		this.name = name;

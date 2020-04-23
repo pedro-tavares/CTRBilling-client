@@ -21,4 +21,14 @@ public class ServerFactory {
 	public static List<Server> getServers() {
 		return serverList;
 	}
+	
+	public static Server getServerByName(String name) {
+		for (Server s: serverList) {
+			if (s.getName().equals(name)) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
 }
