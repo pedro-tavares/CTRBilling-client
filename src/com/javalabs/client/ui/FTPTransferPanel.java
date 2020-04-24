@@ -21,12 +21,16 @@ import com.javalabs.shared.dto.User;
 public class FTPTransferPanel extends TitledPanel {
 
 	private Button testConnectionButton;
+	private Button getAvailableFilesButton;
 	
 	public FTPTransferPanel() {
 		super("FTP Transfer");
 
 		this.setSpacing(20);
-		
+		this.init();
+	}
+	
+	private void init() {
 		ListBox listBoxServers = new ListBox();
 		listBoxServers.setStyleName("listBoxServers");
 		
@@ -34,17 +38,34 @@ public class FTPTransferPanel extends TitledPanel {
 			listBoxServers.addItem(server.getName());
 		}
 		listBoxServers.setVisibleItemCount(ServerFactory.getServers().size());
+		listBoxServers.setSelectedIndex(0);
 		
 		this.add(new Label("Available Servers:"));
 		this.add(listBoxServers);
 		
+		// test connection
 		testConnectionButton = new Button("Test Connection");
 		testConnectionButton.addClickHandler(event -> {
-			Window.alert("Test FOKING Connection:" + listBoxServers.getSelectedValue());
+			//Window.alert("Test FOKING Connection:" + listBoxServers.getSelectedValue());
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
 			callFTPLoginService(server);
 		});
 		this.add(testConnectionButton);
+
+		// available files
+		ListBox listBoxAvailableFiles = new ListBox();
+		listBoxAvailableFiles.setStyleName("listBoxServers");
+
+		this.add(new Label("Available Files:"));
+		this.add(listBoxAvailableFiles);
+		
+		getAvailableFilesButton = new Button("Get Available Files");
+		getAvailableFilesButton.addClickHandler(event -> {
+			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
+			callFTPDirService(server);
+		});
+		this.add(getAvailableFilesButton);
+		
 	}
 	
 	private void callFTPLoginService(Server server) {
@@ -60,7 +81,7 @@ public class FTPTransferPanel extends TitledPanel {
 				
 				//serverResponseLabel.removeStyleName("errorLbl");
 				
-				Window.alert("FTP Login  - SUCCESS to server:" + server.getIpAddress() + "/" + server.getName());
+				Window.alert("FTP login  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 			}
 
 			@Override
@@ -75,7 +96,40 @@ public class FTPTransferPanel extends TitledPanel {
 		        //JSONObject responseObj = responseValue.isObject();
 		        
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
-		        Window.alert("Login  - FAILURE:\n"  + method.getResponse().getText());
+		        Window.alert("FTP login  - FAILURE:\n"  + method.getResponse().getText());
+			}
+		});
+	}
+
+	private void callFTPDirService(Server server) {
+		getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.WAIT);
+		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
+		
+		ServiceFactory.FTP_SERVICE.dir(server, new MethodCallback<String>() {
+
+			@Override
+			public void onSuccess(Method method, String response) {
+				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
+				
+				//serverResponseLabel.removeStyleName("errorLbl");
+				
+				Window.alert("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
+				
+				//serverResponseLabel.addStyleName("errorLbl");
+				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
+				
+				//JSONValue responseValue = JSONParser.parse(method.getResponse().getText());
+		        //JSONObject responseObj = responseValue.isObject();
+		        
+		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
+		        Window.alert("FTP dir  - FAILURE:\n"  + method.getResponse().getText());
 			}
 		});
 	}

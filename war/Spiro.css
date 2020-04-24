@@ -15,6 +15,7 @@ button.gwt-Button {
 	-moz-border-radius: 0px;
 	color: white;
 	background: #5DBCD2;
+	cursor: pointer;
 }
 button.gwt-Button[disabled] {
 	background: lightgrey;

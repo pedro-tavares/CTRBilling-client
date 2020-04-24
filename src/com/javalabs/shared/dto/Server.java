@@ -9,15 +9,17 @@ public class Server implements Serializable {
 	private String name;
 	private String ipAddress;
 	private int port;
+	private String path;
 	private String username;
 	private String password;
 
 	public Server() {}
 	
-	public Server(String name, String ipAddress, int port, String username, String password) {
+	public Server(String name, String ipAddress, int port, String path, String username, String password) {
 		this.name = name;
 		this.ipAddress = ipAddress;
 		this.port = port;
+		this.path = path;
 		this.username = username;
 		this.password = password;
 	}
@@ -46,6 +48,14 @@ public class Server implements Serializable {
 		this.port = port;
 	}
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

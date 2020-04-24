@@ -13,11 +13,16 @@ import org.fusesource.restygwt.client.RestService;
 import com.javalabs.IUIConstants;
 import com.javalabs.shared.dto.Server;
 
-@Path("http://" + IUIConstants.SERVER + ":" + IUIConstants.PORT + "/ftp")
+//@Path("http://" + IUIConstants.SERVER + ":" + IUIConstants.PORT + "/ftp")
+@Path("http://83.170.124.17:" + IUIConstants.PORT + "/ftp")
 public interface IFTPService extends RestService {
 
 	@POST
 	@Path("/login")
 	public void login(@BeanParam Server server, MethodCallback<String> callback);
-		
+
+	@POST
+	@Path("/dir")
+	public void dir(@BeanParam Server server, MethodCallback<String> callback);
+	
 }
