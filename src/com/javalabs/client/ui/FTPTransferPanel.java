@@ -1,5 +1,7 @@
 package com.javalabs.client.ui;
 
+import java.util.List;
+
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
@@ -15,13 +17,15 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.javalabs.client.JavaLabs;
 import com.javalabs.client.factory.ServerFactory;
 import com.javalabs.client.service.ServiceFactory;
+import com.javalabs.shared.dto.FTPFileInfo;
 import com.javalabs.shared.dto.Server;
-import com.javalabs.shared.dto.User;
 
 public class FTPTransferPanel extends TitledPanel {
 
 	private Button testConnectionButton;
 	private Button getAvailableFilesButton;
+	private Label labelAvailableFiles;
+	private ListBox listBoxAvailableFiles;
 	
 	public FTPTransferPanel() {
 		super("FTP Transfer");
@@ -53,10 +57,9 @@ public class FTPTransferPanel extends TitledPanel {
 		this.add(testConnectionButton);
 
 		// available files
-		ListBox listBoxAvailableFiles = new ListBox();
-		listBoxAvailableFiles.setStyleName("listBoxServers");
-
-		this.add(new Label("Available Files:"));
+		listBoxAvailableFiles = new ListBox();
+		labelAvailableFiles = new Label("Available Files:"); 
+		this.add(labelAvailableFiles);
 		this.add(listBoxAvailableFiles);
 		
 		getAvailableFilesButton = new Button("Get Available Files");
@@ -105,16 +108,24 @@ public class FTPTransferPanel extends TitledPanel {
 		getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.WAIT);
 		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
 		
-		ServiceFactory.FTP_SERVICE.dir(server, new MethodCallback<String>() {
+		ServiceFactory.FTP_SERVICE.dir(server, new MethodCallback<List<FTPFileInfo>>() {
 
 			@Override
-			public void onSuccess(Method method, String response) {
+			public void onSuccess(Method method, List<FTPFileInfo> response) {
 				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.removeStyleName("errorLbl");
 				
-				Window.alert("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
+				//Window.alert("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
+				
+				labelAvailableFiles.setText("Available Files (" + response.size() + "):");
+				listBoxAvailableFiles.clear();
+				for (FTPFileInfo fileInfo: response) {
+					listBoxAvailableFiles.addItem(fileInfo.getName() + ", " + fileInfo.getDate());
+				}
+				listBoxAvailableFiles.setVisibleItemCount(25);
+
 			}
 
 			@Override

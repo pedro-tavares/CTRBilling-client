@@ -11,6 +11,7 @@ import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
 import com.javalabs.IUIConstants;
+import com.javalabs.shared.dto.FTPFileInfo;
 import com.javalabs.shared.dto.Server;
 
 //@Path("http://" + IUIConstants.SERVER + ":" + IUIConstants.PORT + "/ftp")
@@ -23,6 +24,6 @@ public interface IFTPService extends RestService {
 
 	@POST
 	@Path("/dir")
-	public void dir(@BeanParam Server server, MethodCallback<String> callback);
+	public void dir(@BeanParam Server server, MethodCallback<List<FTPFileInfo>> callback);
 	
 }

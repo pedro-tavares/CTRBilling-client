@@ -2,15 +2,23 @@ package com.javalabs.shared.dto;
 
 import java.io.Serializable;
 
+import javax.ws.rs.QueryParam;
+
 public class Server implements Serializable {
 
 	private static final long serialVersionUID = 2L;
 	
+	@QueryParam("name")
 	private String name;
+	@QueryParam("ipAddress")
 	private String ipAddress;
+	@QueryParam("port")
 	private int port;
+	@QueryParam("path")
 	private String path;
+	@QueryParam("username")
 	private String username;
+	@QueryParam("password")
 	private String password;
 
 	public Server() {}
