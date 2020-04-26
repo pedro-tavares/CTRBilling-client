@@ -19,12 +19,11 @@ public class MenuPanel extends StackLayoutPanel {
 		ftpDownloadLink.addClickHandler(event -> {
 			JavaLabs.GET().showView(fptTransferPanel);
 		});
-		
+
 		this.add(new HTML("Dashboard options"), new HTML("Dashboard"), 4);   
 		this.add(new HTML("My Account  options"), new HTML("My Account"), 4);  
 		this.add(new HTML("Client options"), new HTML("Client"), 4);
-		this.add(new HTML("Billing options"), new HTML("Billing"), 4);
-		this.add(ftpDownloadLink, new HTML("FTP Transfer"), 4);
+		this.add(ftpDownloadLink, new HTML("Billing"), 4);
 		
 		//TODO
 		/*

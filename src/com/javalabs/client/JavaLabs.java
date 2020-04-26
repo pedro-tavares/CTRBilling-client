@@ -1,33 +1,18 @@
 package com.javalabs.client;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import org.fusesource.restygwt.client.Defaults;
-import org.fusesource.restygwt.client.Method;
-import org.fusesource.restygwt.client.dispatcher.DefaultFilterawareDispatcher;
-import org.fusesource.restygwt.client.dispatcher.DispatcherFilter;
-
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.StackLayoutPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.javalabs.client.ui.CenterPanel;
 import com.javalabs.client.ui.LoggedinPanel;
 import com.javalabs.client.ui.LoginPanel;
