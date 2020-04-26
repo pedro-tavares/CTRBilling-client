@@ -6,17 +6,11 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.javalabs.client.JavaLabs;
 import com.javalabs.client.factory.ServerFactory;
 import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.DowloadFTPFileInfo;
@@ -26,7 +20,9 @@ import com.javalabs.shared.dto.Server;
 public class FTPTransferPanel extends TitledPanel {
 
 	private Button buttonTestConnection;
-	private Button buttonGetAvailableFiles;
+	private Button 
+		buttonGetAvailableFiles,
+		downloadProcessButton;
 	private Label 
 		labelAvailableFiles,
 		labelFileStatus;
@@ -65,11 +61,11 @@ public class FTPTransferPanel extends TitledPanel {
 		this.add(buttonTestConnection);
 
 		// download and process
-		Button downloadProcessButton = new Button("Download and Process");
+		downloadProcessButton = new Button("Download and Process");
 		downloadProcessButton.setVisible(false);
 		downloadProcessButton.addClickHandler(event -> {
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
-			callFTPDownloadFileService(server, labelSelectedDownloadFile.getText());
+			callBillingProcessFileService(server, labelSelectedDownloadFile.getText());
 		});
 		
 		// available files
@@ -78,7 +74,7 @@ public class FTPTransferPanel extends TitledPanel {
 		listBoxAvailableFiles.addItem("None available");		
 		listBoxAvailableFiles.addChangeListener(event -> {
 			labelSelectedDownloadFile.setText(listBoxAvailableFiles.getSelectedItemText().substring(0, listBoxAvailableFiles.getSelectedItemText().indexOf(',')));
-			Window.alert(labelSelectedDownloadFile.getText());
+			//Window.alert(labelSelectedDownloadFile.getText());
 			downloadProcessButton.setVisible(true);
 		});
 		this.add(labelAvailableFiles);
@@ -205,6 +201,41 @@ public class FTPTransferPanel extends TitledPanel {
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
 				labelFileStatus.setText("FTP downloadFile  - FAILURE:\n"  + method.getResponse().getText());
 		        Window.alert("FTP downloadFile  - FAILURE:\n"  + method.getResponse().getText());
+			}
+		});
+	}
+
+	private void callBillingProcessFileService(Server server, String fileName) {
+		buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.WAIT);
+		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
+
+		labelFileStatus.setText("Processing file...");
+		
+		DowloadFTPFileInfo fileInfo = new DowloadFTPFileInfo(server, fileName);
+
+		ServiceFactory.BILLING_SERVICE.processFile(fileInfo, new MethodCallback<String>() {
+
+			@Override
+			public void onSuccess(Method method, String response) {
+				downloadProcessButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
+				
+				labelFileStatus.setText("BILLING processFile - SUCCESS fileName:\n" + fileName);
+				//Window.alert("BILLING processFile - SUCCESS fileName:\n" + fileName);
+				
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				downloadProcessButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
+				
+				//serverResponseLabel.addStyleName("errorLbl");
+				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
+				
+		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
+				labelFileStatus.setText("BILLING processFile - FAILURE:\n"  + method.getResponse().getText());
+		        Window.alert("BILLING processFile - FAILURE:\n"  + method.getResponse().getText());
 			}
 		});
 	}
