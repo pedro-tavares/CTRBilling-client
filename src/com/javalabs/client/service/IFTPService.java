@@ -31,4 +31,8 @@ public interface IFTPService extends RestService {
 	@Path("/download_file")
 	public void downloadFile(@BeanParam DowloadFTPFileInfo fileInfo, MethodCallback<String> callback);
 
+	@POST
+	@Path("/process_file")
+	public void processFile(@BeanParam DowloadFTPFileInfo fileInfo, MethodCallback<String> callback);
+	
 }

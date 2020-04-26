@@ -13,7 +13,8 @@ import org.fusesource.restygwt.client.RestService;
 import com.javalabs.IUIConstants;
 import com.javalabs.shared.dto.User;
 
-@Path("http://" + IUIConstants.SERVER + ":" + IUIConstants.PORT + "/user")
+//@Path("http://" + IUIConstants.SERVER + ":" + IUIConstants.PORT + "/user")
+@Path("http://83.170.124.17:" + IUIConstants.PORT + "/user")
 public interface IUserService extends RestService {
 
 	@POST

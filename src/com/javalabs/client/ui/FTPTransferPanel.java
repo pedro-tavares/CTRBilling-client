@@ -181,14 +181,13 @@ public class FTPTransferPanel extends TitledPanel {
 		labelFileStatus.setText("Downloading file...");
 		
 		DowloadFTPFileInfo fileInfo = new DowloadFTPFileInfo(server, fileName);
+
 		ServiceFactory.FTP_SERVICE.downloadFile(fileInfo, new MethodCallback<String>() {
 
 			@Override
 			public void onSuccess(Method method, String response) {
 				buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
-				
-				//serverResponseLabel.removeStyleName("errorLbl");
 				
 				labelFileStatus.setText("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
 				//Window.alert("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
