@@ -71,8 +71,9 @@ public class FTPTransferPanel extends TitledPanel {
 		});
 		
 		// available files
-		listBoxAvailableFiles = new ListBox();
 		labelAvailableFiles = new Label("Available Files:");
+		listBoxAvailableFiles = new ListBox();
+		listBoxAvailableFiles.addItem("None available");		
 		listBoxAvailableFiles.addChangeListener(event -> {
 			selectedDownloadFileLabel.setText(listBoxAvailableFiles.getSelectedItemText().substring(0, listBoxAvailableFiles.getSelectedItemText().indexOf(',')));
 			Window.alert(selectedDownloadFileLabel.getText());
@@ -154,9 +155,6 @@ public class FTPTransferPanel extends TitledPanel {
 				//serverResponseLabel.addStyleName("errorLbl");
 				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
 				
-				//JSONValue responseValue = JSONParser.parse(method.getResponse().getText());
-		        //JSONObject responseObj = responseValue.isObject();
-		        
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
 		        Window.alert("FTP dir  - FAILURE:\n"  + method.getResponse().getText());
 			}
