@@ -25,9 +25,11 @@ import com.javalabs.shared.dto.Server;
 
 public class FTPTransferPanel extends TitledPanel {
 
-	private Button testConnectionButton;
-	private Button getAvailableFilesButton;
-	private Label labelAvailableFiles;
+	private Button buttonTestConnection;
+	private Button buttonGetAvailableFiles;
+	private Label 
+		labelAvailableFiles,
+		labelFileStatus;
 	private ListBox listBoxAvailableFiles;
 	
 	public FTPTransferPanel() {
@@ -39,7 +41,7 @@ public class FTPTransferPanel extends TitledPanel {
 	
 	@SuppressWarnings("deprecation")
 	private void init() {
-		Label selectedDownloadFileLabel = new Label();
+		Label labelSelectedDownloadFile = new Label();
 		
 		ListBox listBoxServers = new ListBox();
 		listBoxServers.setStyleName("listBoxServers");
@@ -54,20 +56,20 @@ public class FTPTransferPanel extends TitledPanel {
 		this.add(listBoxServers);
 		
 		// test connection
-		testConnectionButton = new Button("Test Connection");
-		testConnectionButton.addClickHandler(event -> {
+		buttonTestConnection = new Button("Test Connection");
+		buttonTestConnection.addClickHandler(event -> {
 			//Window.alert("Test FOKING Connection:" + listBoxServers.getSelectedValue());
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
 			callFTPLoginService(server);
 		});
-		this.add(testConnectionButton);
+		this.add(buttonTestConnection);
 
 		// download and process
 		Button downloadProcessButton = new Button("Download and Process");
 		downloadProcessButton.setVisible(false);
 		downloadProcessButton.addClickHandler(event -> {
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
-			callFTPDownloadFileService(server, selectedDownloadFileLabel.getText());
+			callFTPDownloadFileService(server, labelSelectedDownloadFile.getText());
 		});
 		
 		// available files
@@ -75,68 +77,78 @@ public class FTPTransferPanel extends TitledPanel {
 		listBoxAvailableFiles = new ListBox();
 		listBoxAvailableFiles.addItem("None available");		
 		listBoxAvailableFiles.addChangeListener(event -> {
-			selectedDownloadFileLabel.setText(listBoxAvailableFiles.getSelectedItemText().substring(0, listBoxAvailableFiles.getSelectedItemText().indexOf(',')));
-			Window.alert(selectedDownloadFileLabel.getText());
+			labelSelectedDownloadFile.setText(listBoxAvailableFiles.getSelectedItemText().substring(0, listBoxAvailableFiles.getSelectedItemText().indexOf(',')));
+			Window.alert(labelSelectedDownloadFile.getText());
 			downloadProcessButton.setVisible(true);
 		});
 		this.add(labelAvailableFiles);
 		this.add(listBoxAvailableFiles);
 		
-		getAvailableFilesButton = new Button("Get Available Files");
-		getAvailableFilesButton.addClickHandler(event -> {
+		buttonGetAvailableFiles = new Button("Get Available Files");
+		buttonGetAvailableFiles.addClickHandler(event -> {
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
 			callFTPDirService(server);
 		});
-		this.add(getAvailableFilesButton);
+		this.add(buttonGetAvailableFiles);
 
 		this.add(downloadProcessButton);
 		
+		labelFileStatus = new Label("");
+		labelFileStatus.setStyleName("labelFileStatus");
+		this.add(labelFileStatus);
 	}
 	
 	private void callFTPLoginService(Server server) {
-		testConnectionButton.getElement().getStyle().setCursor(Cursor.WAIT);
+		buttonTestConnection.getElement().getStyle().setCursor(Cursor.WAIT);
 		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
+		
+		labelFileStatus.setText("Logging in...");
 		
 		ServiceFactory.FTP_SERVICE.login(server, new MethodCallback<String>() {
 
 			@Override
 			public void onSuccess(Method method, String response) {
-				testConnectionButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				buttonTestConnection.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.removeStyleName("errorLbl");
 				
 				Window.alert("FTP login  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
+				labelFileStatus.setText("FTP login  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 			}
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				testConnectionButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				buttonTestConnection.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.addStyleName("errorLbl");
 				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
 				
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
+				labelFileStatus.setText("FTP login  - FAILURE:\n"  + method.getResponse().getText());
 		        Window.alert("FTP login  - FAILURE:\n"  + method.getResponse().getText());
 			}
 		});
 	}
 
 	private void callFTPDirService(Server server) {
-		getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.WAIT);
+		buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.WAIT);
 		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
+		
+		labelFileStatus.setText("Fetching files...");
 		
 		ServiceFactory.FTP_SERVICE.dir(server, new MethodCallback<List<FTPFileInfo>>() {
 
 			@Override
 			public void onSuccess(Method method, List<FTPFileInfo> response) {
-				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.removeStyleName("errorLbl");
 				
 				//Window.alert("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
+				labelFileStatus.setText("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 				
 				labelAvailableFiles.setText("Available Files (" + response.size() + "):");
 				listBoxAvailableFiles.clear();
@@ -149,45 +161,50 @@ public class FTPTransferPanel extends TitledPanel {
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.addStyleName("errorLbl");
 				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
 				
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
+				labelFileStatus.setText("FTP dir  - FAILURE:\n"  + method.getResponse().getText());
 		        Window.alert("FTP dir  - FAILURE:\n"  + method.getResponse().getText());
 			}
 		});
 	}
 
 	private void callFTPDownloadFileService(Server server, String fileName) {
-		getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.WAIT);
+		buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.WAIT);
 		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
+
+		labelFileStatus.setText("Downloading file...");
 		
 		DowloadFTPFileInfo fileInfo = new DowloadFTPFileInfo(server, fileName);
 		ServiceFactory.FTP_SERVICE.downloadFile(fileInfo, new MethodCallback<String>() {
 
 			@Override
 			public void onSuccess(Method method, String response) {
-				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.removeStyleName("errorLbl");
 				
-				Window.alert("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
+				labelFileStatus.setText("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
+				//Window.alert("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
 				
 			}
 
 			@Override
 			public void onFailure(Method method, Throwable exception) {
-				getAvailableFilesButton.getElement().getStyle().setCursor(Cursor.DEFAULT);
+				buttonGetAvailableFiles.getElement().getStyle().setCursor(Cursor.DEFAULT);
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//serverResponseLabel.addStyleName("errorLbl");
 				//showDialogBox("Login  - FAILURE", method.getResponse().getText());
 				
 		        //errorLbl.setText(responseObj.get("message").isString().stringValue());
+				labelFileStatus.setText("FTP downloadFile  - FAILURE:\n"  + method.getResponse().getText());
 		        Window.alert("FTP downloadFile  - FAILURE:\n"  + method.getResponse().getText());
 			}
 		});
