@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.javalabs.client.JavaLabs;
 import com.javalabs.client.factory.ServerFactory;
 import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.DowloadFTPFileInfo;
@@ -92,6 +93,13 @@ public class FTPTransferPanel extends TitledPanel {
 		labelFileStatus = new Label("");
 		labelFileStatus.setStyleName("labelFileStatus");
 		this.add(labelFileStatus);
+	}
+
+	private void showBillingRecords(String fileName) {
+		BillingRecordPanel panelBillingRecords = new BillingRecordPanel(fileName);
+		this.add(panelBillingRecords);
+		
+		JavaLabs.GET().showView(panelBillingRecords);
 	}
 	
 	private void callFTPLoginService(Server server) {
@@ -222,7 +230,8 @@ public class FTPTransferPanel extends TitledPanel {
 				
 				labelFileStatus.setText("BILLING processFile - SUCCESS fileName:\n" + fileName);
 				//Window.alert("BILLING processFile - SUCCESS fileName:\n" + fileName);
-				
+
+				showBillingRecords(fileName);
 			}
 
 			@Override

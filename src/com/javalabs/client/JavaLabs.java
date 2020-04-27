@@ -180,6 +180,9 @@ public class JavaLabs implements EntryPoint {
 	public void showView(Panel viewPanel) {
 		centerImgLoggedIn.removeFromParent();
 		
+		if (lastViewPanel != null) {
+			lastViewPanel.removeFromParent();
+		}
 		//Window.alert("showView:\n" + viewPanel.toString());
 		lastViewPanel = viewPanel;
 		//viewPanel.setPixelSize(Window.getClientWidth()-200, Window.getClientHeight()-75);

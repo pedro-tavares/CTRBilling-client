@@ -128,6 +128,11 @@ button.gwt-Button[disabled] {
 	overflow: hidden;	
 }
 
+.labelFileStatus {
+	font-weight: bold;
+	color: blue;
+}
+
 /*******************************************************************************************************************/
 .gwt-DecoratedStackPanel {
   border-bottom: 1px solid #bbbbbb;
