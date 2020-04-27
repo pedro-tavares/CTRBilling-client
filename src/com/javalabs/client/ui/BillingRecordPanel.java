@@ -41,7 +41,7 @@ public class BillingRecordPanel extends TitledPanel {
 	
 	private void init() {
 
-		  CellTable<BillingRecord> table = new CellTable<BillingRecord>();
+		  table = new CellTable<BillingRecord>();
 		  table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		
 		  TextColumn<BillingRecord> idColumn = 
@@ -110,7 +110,7 @@ public class BillingRecordPanel extends TitledPanel {
 			public void onSuccess(Method method, List<BillingRecord> response) {
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
-				Window.alert("BILLING getBillingRecords - SUCCESS fileName:\n" + fileName);
+				//Window.alert("BILLING getBillingRecords - SUCCESS fileName:\n" + fileName);
 
 				setModel(response);
 			}
