@@ -1,7 +1,6 @@
 package com.javalabs.client.ui;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.cellview.client.CellTable;
@@ -10,8 +9,6 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-import com.javalabs.shared.dto.BillingRecord;
-import com.javalabs.shared.dto.DowloadFTPFileInfo;
 import com.javalabs.shared.dto.FTPFileInfo;
 
 public class FTPTransferAvailableFilesPanel extends VerticalPanel {
@@ -40,7 +37,7 @@ public class FTPTransferAvailableFilesPanel extends VerticalPanel {
 		        return object.getName().toString();
 		     }
 		  };
-		  table.addColumn(idColumn, "File Name");
+		  table.addColumn(idColumn, "File");
 
 		  TextColumn<FTPFileInfo> fileNameColumn = 
 		  new TextColumn<FTPFileInfo>() {
@@ -83,6 +80,7 @@ public class FTPTransferAvailableFilesPanel extends VerticalPanel {
 
 	public void setModel(List<FTPFileInfo> model) {
 		AVAILABLE_FILES = model;
+		table.setPageSize(50);
 		table.setRowData(0, AVAILABLE_FILES);
 	}
 	

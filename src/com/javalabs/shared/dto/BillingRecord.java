@@ -114,7 +114,7 @@ public class BillingRecord implements Serializable {
 	public BillingRecord(Long id, String fileName, Date timestamp, String callType, String callCause, String customerIdentifir,
 			String telephoneNumberDialled, String callDate, String callTime, String duration, String bytesTransmitted,
 			String bytesReceived, String description, String chargecode, String timeBand, String salesprice,
-			String salespricePreBundle, String extension, String dDI, String groupingID, String callClass,
+			String salespricePreBundle, String extension, String ddi, String groupingID, String callClass,
 			String carrier, String recording, String vAT, String countryOfOrigin, String network,
 			String retailTariffCode, String remoteNetwork, String aPN, String divertedNumber, String ringTime,
 			String recordID, String currency, String presentationNumber, String networkAccessReference,
@@ -142,7 +142,7 @@ public class BillingRecord implements Serializable {
 		Salesprice = salesprice;
 		SalespricePreBundle = salespricePreBundle;
 		Extension = extension;
-		DDI = dDI;
+		DDI = ddi;
 		GroupingID = groupingID;
 		CallClass = callClass;
 		Carrier = carrier;
@@ -318,8 +318,14 @@ public class BillingRecord implements Serializable {
 	public String getDDI() {
 		return DDI;
 	}
+	public String getdDI() {
+		return DDI;
+	}
 
 	public void setDDI(String dDI) {
+		DDI = dDI;
+	}
+	public void setdDI(String dDI) {
 		DDI = dDI;
 	}
 
@@ -358,8 +364,14 @@ public class BillingRecord implements Serializable {
 	public String getVAT() {
 		return VAT;
 	}
+	public String getvAT() {
+		return VAT;
+	}
 
 	public void setVAT(String vAT) {
+		VAT = vAT;
+	}
+	public void setvAT(String vAT) {
 		VAT = vAT;
 	}
 
@@ -398,8 +410,14 @@ public class BillingRecord implements Serializable {
 	public String getAPN() {
 		return APN;
 	}
+	public String getaPN() {
+		return APN;
+	}
 
 	public void setAPN(String aPN) {
+		APN = aPN;
+	}
+	public void setaPN(String aPN) {
 		APN = aPN;
 	}
 
@@ -454,16 +472,28 @@ public class BillingRecord implements Serializable {
 	public String getNGCSAccessCharge() {
 		return NGCSAccessCharge;
 	}
+	public String getnGCSAccessCharge() {
+		return NGCSAccessCharge;
+	}
 
 	public void setNGCSAccessCharge(String nGCSAccessCharge) {
+		NGCSAccessCharge = nGCSAccessCharge;
+	}
+	public void setnGCSAccessCharge(String nGCSAccessCharge) {
 		NGCSAccessCharge = nGCSAccessCharge;
 	}
 
 	public String getNGCSServiceCharge() {
 		return NGCSServiceCharge;
 	}
+	public String getnGCSServiceCharge() {
+		return NGCSServiceCharge;
+	}
 
 	public void setNGCSServiceCharge(String nGCSServiceCharge) {
+		NGCSServiceCharge = nGCSServiceCharge;
+	}
+	public void setnGCSServiceCharge(String nGCSServiceCharge) {
 		NGCSServiceCharge = nGCSServiceCharge;
 	}
 

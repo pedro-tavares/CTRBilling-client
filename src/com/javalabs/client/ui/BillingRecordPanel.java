@@ -1,35 +1,42 @@
 package com.javalabs.client.ui;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
-import com.google.gwt.cell.client.DateCell;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.javalabs.client.service.ServiceFactory;
 import com.javalabs.shared.dto.BillingRecord;
 
 public class BillingRecordPanel extends TitledPanel {
 
 	private List<BillingRecord> BILLING_RECORDS;
+	private CellTable<BillingRecord> table;
 	
 	public BillingRecordPanel(String fileName) {
 		super(/*"Imported Billing Records: " +*/ fileName.replace(".txt", ""));
 
+		/*
 		BILLING_RECORDS = Arrays.asList(
 				new BillingRecord(1L, "fileName 1", new Date()),
 				new BillingRecord(2L, "fileName 2", new Date()),
 				new BillingRecord(3L, "fileName 3", new Date())
 		);
+		*/
 		
 		this.setSpacing(20);		
 		this.init();
+
+		callBillingGetBillingRecordsService(fileName);
 	}
 	
 	private void init() {
@@ -77,15 +84,7 @@ public class BillingRecordPanel extends TitledPanel {
 		        }
 		     }
 		  });
-		
-		  // Set the total row count. This isn't strictly necessary,
-		  // but it affects paging calculations, so its good habit to
-		  // keep the row count up to date.
-		  table.setRowCount(BILLING_RECORDS.size(), true);
-		
-		  // Push the data into the widget.
-		  table.setRowData(0, BILLING_RECORDS);
-		
+				
 		  VerticalPanel panel = new VerticalPanel();
 		  panel.setBorderWidth(1);	    
 		  panel.setWidth("400");
@@ -95,4 +94,34 @@ public class BillingRecordPanel extends TitledPanel {
 		  this.add(panel);
 	}		
 
+	public void setModel(List<BillingRecord> model) {
+		BILLING_RECORDS = model;
+		table.setPageSize(50);
+		table.setRowData(0, BILLING_RECORDS);
+		table.setRowCount(BILLING_RECORDS.size(), true);
+	}
+	
+	private void callBillingGetBillingRecordsService(String fileName) {
+		RootPanel.getBodyElement().getStyle().setCursor(Cursor.WAIT);
+
+		ServiceFactory.BILLING_SERVICE.getBillingRecords(fileName, new MethodCallback<List<BillingRecord>>() {
+
+			@Override
+			public void onSuccess(Method method, List<BillingRecord> response) {
+				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
+				
+				Window.alert("BILLING getBillingRecords - SUCCESS fileName:\n" + fileName);
+
+				setModel(response);
+			}
+
+			@Override
+			public void onFailure(Method method, Throwable exception) {
+				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
+				
+		        Window.alert("BILLING getBillingRecords - FAILURE:\n"  + method.getResponse().getText());
+			}
+		});
+	}
+	
 }

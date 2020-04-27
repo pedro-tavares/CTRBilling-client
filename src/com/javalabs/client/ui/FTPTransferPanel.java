@@ -72,7 +72,7 @@ public class FTPTransferPanel extends TitledPanel {
 		downloadProcessButton.setVisible(false);
 		downloadProcessButton.addClickHandler(event -> {
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
-			callBillingProcessFileService(server, labelSelectedDownloadFile.getText());
+			callFTPDownloadFileService(server, labelSelectedDownloadFile.getText());
 		});
 		
 		// available files
@@ -111,9 +111,10 @@ public class FTPTransferPanel extends TitledPanel {
 	}
 
 	private void showBillingRecords(String fileName) {
+		Window.alert("KARALHO!!!");
 		BillingRecordPanel panelBillingRecords = new BillingRecordPanel(fileName);
 		this.add(panelBillingRecords);
-		
+		Window.alert("THE FOK!!!");
 		JavaLabs.GET().showView(panelBillingRecords);
 	}
 	
@@ -170,13 +171,6 @@ public class FTPTransferPanel extends TitledPanel {
 				labelFileStatus.setText("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 				
 				labelAvailableFiles.setText("Available Files (" + response.size() + "):");
-				/*
-				listBoxAvailableFiles.clear();
-				for (FTPFileInfo fileInfo: response) {
-					listBoxAvailableFiles.addItem(fileInfo.getName() + ", " + fileInfo.getDate());
-				}
-				listBoxAvailableFiles.setVisibleItemCount(25);
-				*/
 				
 				panelFTPTransferAvailableFiles.setVisible(true);
 				panelFTPTransferAvailableFiles.setModel(response);
@@ -215,6 +209,7 @@ public class FTPTransferPanel extends TitledPanel {
 				labelFileStatus.setText("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
 				//Window.alert("FTP downloadFile  - SUCCESS fileName:\n" + fileName);
 				
+				callBillingProcessFileService(server, fileName);
 			}
 
 			@Override
