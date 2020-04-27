@@ -32,7 +32,7 @@ public class BillingRecordPanel extends TitledPanel {
 	List<Contact> CONTACTS;
 	
 	public BillingRecordPanel(String fileName) {
-		super(/*"Imported Billing Records: " +*/ fileName);
+		super(/*"Imported Billing Records: " +*/ fileName.replace(".txt", ""));
 
 		CONTACTS = Arrays.asList(
 				new Contact("John", new Date(80, 4, 12), "123 Fourth Avenue"),
