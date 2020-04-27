@@ -13,31 +13,20 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-
-class Contact {
-
-	final String address;
-    final Date birthday;
-    final String name;
-
-    public Contact(String name, Date birthday, String address) {
-       this.name = name;
-       this.birthday = birthday;
-       this.address = address;
-    }
-}
+import com.javalabs.shared.dto.BillingRecord;
 
 public class BillingRecordPanel extends TitledPanel {
 
-	List<Contact> CONTACTS;
+	private List<BillingRecord> BILLING_RECORDS;
 	
 	public BillingRecordPanel(String fileName) {
 		super(/*"Imported Billing Records: " +*/ fileName.replace(".txt", ""));
 
-		CONTACTS = Arrays.asList(
-				new Contact("John", new Date(80, 4, 12), "123 Fourth Avenue"),
-			    new Contact("Joe", new Date(85, 2, 22), "22 Lance Ln"),
-			    new Contact("George",new Date(46, 6, 6),"1600 Pennsylvania Avenue"));
+		BILLING_RECORDS = Arrays.asList(
+				new BillingRecord(1L, "fileName 1", new Date()),
+				new BillingRecord(2L, "fileName 2", new Date()),
+				new BillingRecord(3L, "fileName 3", new Date())
+		);
 		
 		this.setSpacing(20);		
 		this.init();
@@ -45,67 +34,65 @@ public class BillingRecordPanel extends TitledPanel {
 	
 	private void init() {
 
-		CellTable<Contact> table = new CellTable<Contact>();
-	      table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		  CellTable<BillingRecord> table = new CellTable<BillingRecord>();
+		  table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		
+		  TextColumn<BillingRecord> idColumn = 
+		  new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getId().toString();
+		     }
+		  };
+		  table.addColumn(idColumn, "ID");
 
-	      TextColumn<Contact> nameColumn = 
-	      new TextColumn<Contact>() {
-	         @Override
-	         public String getValue(Contact object) {
-	            return object.name;
-	         }
-	      };
-	      table.addColumn(nameColumn, "Name");
-
-	      DateCell dateCell = new DateCell();
-	      Column<Contact, Date> dateColumn 
-	      = new Column<Contact, Date>(dateCell) {
-	         @Override
-	         public Date getValue(Contact object) {
-	            return object.birthday;
-	         }
-	      };
-	      table.addColumn(dateColumn, "Birthday");
-
-	      // Add a text column to show the address.
-	      TextColumn<Contact> addressColumn 
-	      = new TextColumn<Contact>() {
-	         @Override
-	         public String getValue(Contact object) {
-	            return object.address;
-	         }
-	      };
-	      table.addColumn(addressColumn, "Address");
-
-	      // Add a selection model to handle user selection.
-	      final SingleSelectionModel<Contact> selectionModel 
-	      = new SingleSelectionModel<Contact>();
-	      table.setSelectionModel(selectionModel);
-	      selectionModel.addSelectionChangeHandler(
-	      new SelectionChangeEvent.Handler() {
-	         public void onSelectionChange(SelectionChangeEvent event) {
-	            Contact selected = selectionModel.getSelectedObject();
-	            if (selected != null) {
-	               //Window.alert("You selected: " + selected.name);
-	            }
-	         }
-	      });
-
-	      // Set the total row count. This isn't strictly necessary,
-	      // but it affects paging calculations, so its good habit to
-	      // keep the row count up to date.
-	      table.setRowCount(CONTACTS.size(), true);
-
-	      // Push the data into the widget.
-	      table.setRowData(0, CONTACTS);
-
-	      VerticalPanel panel = new VerticalPanel();
-	      panel.setBorderWidth(1);	    
-	      panel.setWidth("400");
-	      panel.add(table);
-
-	      // Add the widgets to the root panel.
-	      this.add(panel);
+		  TextColumn<BillingRecord> fileNameColumn = 
+		  new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getFileName().toString();
+		     }
+		  };
+		  table.addColumn(fileNameColumn, "FileName");
+		  
+		  TextColumn<BillingRecord> timestampColumn = 
+		  new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getTimestamp().toString();
+		     }
+		  };
+		  table.addColumn(timestampColumn, "Imported on");
+		
+		  // Add a selection model to handle user selection.
+		  final SingleSelectionModel<BillingRecord> selectionModel 
+		  = new SingleSelectionModel<BillingRecord>();
+		  table.setSelectionModel(selectionModel);
+		  selectionModel.addSelectionChangeHandler(
+		  new SelectionChangeEvent.Handler() {
+		     public void onSelectionChange(SelectionChangeEvent event) {
+		    	 BillingRecord selected = selectionModel.getSelectedObject();
+		        if (selected != null) {
+		           //Window.alert("You selected: " + selected.getId());
+		        }
+		     }
+		  });
+		
+		  // Set the total row count. This isn't strictly necessary,
+		  // but it affects paging calculations, so its good habit to
+		  // keep the row count up to date.
+		  table.setRowCount(BILLING_RECORDS.size(), true);
+		
+		  // Push the data into the widget.
+		  table.setRowData(0, BILLING_RECORDS);
+		
+		  VerticalPanel panel = new VerticalPanel();
+		  panel.setBorderWidth(1);	    
+		  panel.setWidth("400");
+		  panel.add(table);
+		
+		  // Add the widgets to the root panel.
+		  this.add(panel);
 	}		
 
 }

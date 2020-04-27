@@ -6,11 +6,16 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.javalabs.client.JavaLabs;
 import com.javalabs.client.factory.ServerFactory;
 import com.javalabs.client.service.ServiceFactory;
@@ -27,7 +32,7 @@ public class FTPTransferPanel extends TitledPanel {
 	private Label 
 		labelAvailableFiles,
 		labelFileStatus;
-	private ListBox listBoxAvailableFiles;
+	private FTPTransferAvailableFilesPanel panelFTPTransferAvailableFiles;
 	
 	public FTPTransferPanel() {
 		super("FTP Transfer");
@@ -38,6 +43,7 @@ public class FTPTransferPanel extends TitledPanel {
 	
 	@SuppressWarnings("deprecation")
 	private void init() {
+		
 		Label labelSelectedDownloadFile = new Label();
 		
 		ListBox listBoxServers = new ListBox();
@@ -71,16 +77,25 @@ public class FTPTransferPanel extends TitledPanel {
 		
 		// available files
 		labelAvailableFiles = new Label("Available Files:");
-		listBoxAvailableFiles = new ListBox();
-		listBoxAvailableFiles.addItem("None available");		
-		listBoxAvailableFiles.addChangeListener(event -> {
-			labelSelectedDownloadFile.setText(listBoxAvailableFiles.getSelectedItemText().substring(0, listBoxAvailableFiles.getSelectedItemText().indexOf(',')));
-			//Window.alert(labelSelectedDownloadFile.getText());
-			downloadProcessButton.setVisible(true);
-		});
 		this.add(labelAvailableFiles);
-		this.add(listBoxAvailableFiles);
 		
+		panelFTPTransferAvailableFiles = new FTPTransferAvailableFilesPanel();
+		panelFTPTransferAvailableFiles.setVisible(false);
+
+		final SingleSelectionModel<FTPFileInfo> singleSelectionModel = new SingleSelectionModel<FTPFileInfo>();
+		panelFTPTransferAvailableFiles.getModelTable().setSelectionModel(singleSelectionModel);
+	    singleSelectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	      public void onSelectionChange(SelectionChangeEvent event) {
+	    	FTPFileInfo selectedFileInfo = singleSelectionModel.getSelectedObject();
+	        if (selectedFileInfo != null) {
+	          //Window.alert("Selected: " + selectedFileInfo.getName());
+	        	labelSelectedDownloadFile.setText(selectedFileInfo.getName());
+	        	downloadProcessButton.setVisible(true);
+	        }
+	      }
+	    });		
+		this.add(panelFTPTransferAvailableFiles);
+
 		buttonGetAvailableFiles = new Button("Get Available Files");
 		buttonGetAvailableFiles.addClickHandler(event -> {
 			Server server = ServerFactory.getServerByName(listBoxServers.getSelectedValue());
@@ -155,12 +170,16 @@ public class FTPTransferPanel extends TitledPanel {
 				labelFileStatus.setText("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 				
 				labelAvailableFiles.setText("Available Files (" + response.size() + "):");
+				/*
 				listBoxAvailableFiles.clear();
 				for (FTPFileInfo fileInfo: response) {
 					listBoxAvailableFiles.addItem(fileInfo.getName() + ", " + fileInfo.getDate());
 				}
 				listBoxAvailableFiles.setVisibleItemCount(25);
-
+				*/
+				
+				panelFTPTransferAvailableFiles.setVisible(true);
+				panelFTPTransferAvailableFiles.setModel(response);
 			}
 
 			@Override

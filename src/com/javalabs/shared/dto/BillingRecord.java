@@ -102,6 +102,15 @@ public class BillingRecord implements Serializable {
 
 	public BillingRecord() {}
 
+	// Dummy 
+	public BillingRecord(Long id, String fileName, Date timestamp) {
+		super();
+		
+		this.id = id;
+		FileName = fileName;
+		Timestamp = timestamp;		
+	}
+	
 	public BillingRecord(Long id, String fileName, Date timestamp, String callType, String callCause, String customerIdentifir,
 			String telephoneNumberDialled, String callDate, String callTime, String duration, String bytesTransmitted,
 			String bytesReceived, String description, String chargecode, String timeBand, String salesprice,
