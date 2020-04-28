@@ -111,10 +111,9 @@ public class FTPTransferPanel extends TitledPanel {
 	}
 
 	private void showBillingRecords(String fileName) {
-		Window.alert("KARALHO!!!");
 		BillingRecordPanel panelBillingRecords = new BillingRecordPanel(fileName);
 		this.add(panelBillingRecords);
-		Window.alert("THE FOK!!!");
+
 		JavaLabs.GET().showView(panelBillingRecords);
 	}
 	
@@ -170,7 +169,7 @@ public class FTPTransferPanel extends TitledPanel {
 				//Window.alert("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 				labelFileStatus.setText("FTP dir  - SUCCESS to server:\n" + server.getName() + ":" + server.getIpAddress());
 				
-				labelAvailableFiles.setText("Available Files (" + response.size() + "):");
+				labelAvailableFiles.setText("Showing 50 of available Files (" + response.size() + "):");
 				
 				panelFTPTransferAvailableFiles.setVisible(true);
 				panelFTPTransferAvailableFiles.setModel(response);

@@ -44,8 +44,7 @@ public class BillingRecordPanel extends TitledPanel {
 		  table = new CellTable<BillingRecord>();
 		  table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 		
-		  TextColumn<BillingRecord> idColumn = 
-		  new TextColumn<BillingRecord>() {
+		  TextColumn<BillingRecord> idColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
 		        return object.getId().toString();
@@ -53,24 +52,161 @@ public class BillingRecordPanel extends TitledPanel {
 		  };
 		  table.addColumn(idColumn, "ID");
 
-		  TextColumn<BillingRecord> fileNameColumn = 
-		  new TextColumn<BillingRecord>() {
+/*		  
+		  TextColumn<BillingRecord> fileNameColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
 		        return object.getFileName().toString();
 		     }
 		  };
-		  table.addColumn(fileNameColumn, "FileName");
-		  
-		  TextColumn<BillingRecord> timestampColumn = 
-		  new TextColumn<BillingRecord>() {
+		  table.addColumn(fileNameColumn, "File");
+*/
+/*
+		  TextColumn<BillingRecord> timestampColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
 		        return object.getTimestamp().toString();
 		     }
 		  };
 		  table.addColumn(timestampColumn, "Imported on");
-		
+*/		
+		  TextColumn<BillingRecord> callTypeColumn = 
+		  new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getCallType().toString();
+		     }
+		  };
+		  table.addColumn(callTypeColumn, "Call Type");
+
+		  TextColumn<BillingRecord> callCauseColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getCallCause().toString();
+		     }
+		  };
+		  table.addColumn(callCauseColumn, "Call Cause");
+
+		  TextColumn<BillingRecord> customerIdentifirColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getCustomerIdentifir().toString();
+		     }
+		  };
+		  table.addColumn(customerIdentifirColumn, "Customer Identifier");
+
+		  TextColumn<BillingRecord> telephoneNumberDialledColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getTelephoneNumberDialled().toString();
+		     }
+		  };
+		  table.addColumn(telephoneNumberDialledColumn, "Telephone Number Dialled");
+
+		  TextColumn<BillingRecord> callDateColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getCallDate().toString();
+		     }
+		  };
+		  table.addColumn(callDateColumn, "Call Date");
+
+		  TextColumn<BillingRecord> callTimeColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getCallTime().toString();
+		     }
+		  };
+		  table.addColumn(callTimeColumn, "Call Time");
+
+		  TextColumn<BillingRecord> durationColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getDuration().toString();
+		     }
+		  };
+		  table.addColumn(durationColumn, "Duration");
+
+		  TextColumn<BillingRecord> bytesTransmittedColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getBytesTransmitted().toString();
+		     }
+		  };
+		  table.addColumn(bytesTransmittedColumn, "Bytes Transmitted");
+
+		  TextColumn<BillingRecord> bytesReceivedColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getBytesReceived().toString();
+		     }
+		  };
+		  table.addColumn(bytesReceivedColumn, "Bytes Received");
+
+		  TextColumn<BillingRecord> descriptionColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getDescription().toString();
+		     }
+		  };
+		  table.addColumn(descriptionColumn, "Description");
+
+		  TextColumn<BillingRecord> chargeCodeColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getChargecode().toString();
+		     }
+		  };
+		  table.addColumn(chargeCodeColumn, "Charge Code");
+
+		  TextColumn<BillingRecord> timeBandColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getTimeBand().toString();
+		     }
+		  };
+		  table.addColumn(timeBandColumn, "Time Band");
+
+		  TextColumn<BillingRecord> salesPriceColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getSalesprice().toString();
+		     }
+		  };
+		  table.addColumn(salesPriceColumn, "Sales Price");
+
+		  TextColumn<BillingRecord> salesPricePreBundleColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getSalespricePreBundle().toString();
+		     }
+		  };
+		  table.addColumn(salesPricePreBundleColumn, "Sales Price (Pre Bundle)");
+
+		  TextColumn<BillingRecord> extensionColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return object.getExtension().toString();
+		     }
+		  };
+		  table.addColumn(extensionColumn, "Extension");
+		 
+		  TextColumn<BillingRecord> DDIBundleColumn = new TextColumn<BillingRecord>() {
+		     @Override
+		     public String getValue(BillingRecord object) {
+		        return (object.getDDI() != null) ? object.getDDI() : "";
+		     }
+		  };
+		  table.addColumn(DDIBundleColumn, "DDI");		  
+
+		  TextColumn<BillingRecord> groupingIDColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getGroupingID().toString();
+			  }
+		  };
+		  table.addColumn(groupingIDColumn, "GroupingID");
+		  
 		  // Add a selection model to handle user selection.
 		  final SingleSelectionModel<BillingRecord> selectionModel 
 		  = new SingleSelectionModel<BillingRecord>();
@@ -96,6 +232,7 @@ public class BillingRecordPanel extends TitledPanel {
 
 	public void setModel(List<BillingRecord> model) {
 		BILLING_RECORDS = model;
+		
 		table.setPageSize(50);
 		table.setRowData(0, BILLING_RECORDS);
 		table.setRowCount(BILLING_RECORDS.size(), true);
@@ -111,7 +248,7 @@ public class BillingRecordPanel extends TitledPanel {
 				RootPanel.getBodyElement().getStyle().setCursor(Cursor.DEFAULT);
 				
 				//Window.alert("BILLING getBillingRecords - SUCCESS fileName:\n" + fileName);
-
+				
 				setModel(response);
 			}
 
