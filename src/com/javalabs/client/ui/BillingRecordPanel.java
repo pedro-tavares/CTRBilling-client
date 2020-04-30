@@ -5,13 +5,26 @@ import java.util.List;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DomEvent;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.CellPreviewEvent.Handler;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.javalabs.client.service.ServiceFactory;
@@ -69,7 +82,8 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(timestampColumn, "Imported on");
-*/		
+*/
+/*
 		  TextColumn<BillingRecord> callTypeColumn = 
 		  new TextColumn<BillingRecord>() {
 		     @Override
@@ -78,7 +92,8 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(callTypeColumn, "Call Type");
-
+*/
+/*		  
 		  TextColumn<BillingRecord> callCauseColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -86,7 +101,7 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(callCauseColumn, "Call Cause");
-
+*/
 		  TextColumn<BillingRecord> customerIdentifirColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -126,7 +141,7 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(durationColumn, "Duration");
-
+/*
 		  TextColumn<BillingRecord> bytesTransmittedColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -134,7 +149,8 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(bytesTransmittedColumn, "Bytes Transmitted");
-
+*/
+/*		  
 		  TextColumn<BillingRecord> bytesReceivedColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -142,7 +158,8 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(bytesReceivedColumn, "Bytes Received");
-
+*/
+/*		  
 		  TextColumn<BillingRecord> descriptionColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -150,7 +167,7 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(descriptionColumn, "Description");
-
+*/
 		  TextColumn<BillingRecord> chargeCodeColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -158,7 +175,7 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(chargeCodeColumn, "Charge Code");
-
+/*
 		  TextColumn<BillingRecord> timeBandColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -166,7 +183,8 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(timeBandColumn, "Time Band");
-
+*/
+/*		  
 		  TextColumn<BillingRecord> salesPriceColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -174,7 +192,7 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(salesPriceColumn, "Sales Price");
-
+*/
 		  TextColumn<BillingRecord> salesPricePreBundleColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -190,7 +208,8 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(extensionColumn, "Extension");
-		 
+
+/*		  
 		  TextColumn<BillingRecord> DDIBundleColumn = new TextColumn<BillingRecord>() {
 		     @Override
 		     public String getValue(BillingRecord object) {
@@ -198,18 +217,133 @@ public class BillingRecordPanel extends TitledPanel {
 		     }
 		  };
 		  table.addColumn(DDIBundleColumn, "DDI");		  
-
+*/
+/*		  
 		  TextColumn<BillingRecord> groupingIDColumn = new TextColumn<BillingRecord>() {
 			  @Override
 			  public String getValue(BillingRecord object) {
 				  return object.getGroupingID().toString();
 			  }
 		  };
-		  table.addColumn(groupingIDColumn, "GroupingID");
-		  
+		  table.addColumn(groupingIDColumn, "Grouping ID");
+*/
+/*		  
+		  TextColumn<BillingRecord> callClassColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getCallClass().toString();
+			  }
+		  };
+		  table.addColumn(callClassColumn, "Call Class");
+*/
+/*		  
+		  TextColumn<BillingRecord> carrierColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getCarrier().toString();
+			  }
+		  };
+		  table.addColumn(carrierColumn, "Carrier");
+*/
+/*		  
+		  TextColumn<BillingRecord> recordingColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getRecording().toString();
+			  }
+		  };
+		  table.addColumn(recordingColumn, "Recording");
+*/
+/*		  
+		  TextColumn<BillingRecord> VATColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return (object.getVAT() != null) ? object.getVAT() : "";
+			  }
+		  };
+		  table.addColumn(VATColumn, "VAT");
+*/
+/*		  
+		  TextColumn<BillingRecord> countryOfOriginColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getCountryOfOrigin().toString();
+			  }
+		  };
+		  table.addColumn(countryOfOriginColumn, "Country Of Origin");
+*/
+/*		  
+		  TextColumn<BillingRecord> networkColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getNetwork().toString();
+			  }
+		  };
+		  table.addColumn(networkColumn, "Network");
+*/
+/*		  
+		  TextColumn<BillingRecord> retailTariffCodeColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getRetailTariffCode().toString();
+			  }
+		  };
+		  table.addColumn(retailTariffCodeColumn, "Retail Tariff Code");
+*/
+/*		  
+		  TextColumn<BillingRecord> remoteNetworkColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getRemoteNetwork().toString();
+			  }
+		  };
+		  table.addColumn(remoteNetworkColumn, "Remote Network");
+*/
+/*		  
+		  TextColumn<BillingRecord> apnColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return (object.getAPN() != null) ? object.getAPN() : "";
+			  }
+		  };
+		  table.addColumn(apnColumn, "APN");
+*/
+/*		  
+		  TextColumn<BillingRecord> divertedNumberColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getDivertedNumber().toString();
+			  }
+		  };
+		  table.addColumn(divertedNumberColumn, "Diverted Number");
+*/
+/*		  
+		  TextColumn<BillingRecord> ringTimeColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getRingTime().toString();
+			  }
+		  };
+		  table.addColumn(ringTimeColumn, "Ring Time");
+*/
+/*		  
+		  TextColumn<BillingRecord> recordIDColumn = new TextColumn<BillingRecord>() {
+			  @Override
+			  public String getValue(BillingRecord object) {
+				  return object.getRecordID().toString();
+			  }
+		  };
+		  table.addColumn(recordIDColumn, "Record ID");
+*/
+
+		  SimplePager.Resources resources = GWT.create(SimplePager.Resources.class); 
+		  SimplePager simplePager = new SimplePager(TextLocation.CENTER, resources , false, 0, true);
+		  simplePager.setDisplay(table);
+		  simplePager.setPageSize(5);
+		  this.add(simplePager);
+
 		  // Add a selection model to handle user selection.
-		  final SingleSelectionModel<BillingRecord> selectionModel 
-		  = new SingleSelectionModel<BillingRecord>();
+		  final SingleSelectionModel<BillingRecord> selectionModel = new SingleSelectionModel<BillingRecord>();
 		  table.setSelectionModel(selectionModel);
 		  selectionModel.addSelectionChangeHandler(
 		  new SelectionChangeEvent.Handler() {
@@ -220,7 +354,8 @@ public class BillingRecordPanel extends TitledPanel {
 		        }
 		     }
 		  });
-				
+
+		  
 		  VerticalPanel panel = new VerticalPanel();
 		  panel.setBorderWidth(1);	    
 		  panel.setWidth("400");
@@ -232,6 +367,8 @@ public class BillingRecordPanel extends TitledPanel {
 
 	public void setModel(List<BillingRecord> model) {
 		BILLING_RECORDS = model;
+		
+		GWT.log("BILLING_RECORDS.size: " + BILLING_RECORDS.size());
 		
 		table.setPageSize(50);
 		table.setRowData(0, BILLING_RECORDS);
