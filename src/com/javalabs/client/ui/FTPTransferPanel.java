@@ -35,7 +35,7 @@ public class FTPTransferPanel extends TitledPanel {
 	private FTPTransferAvailableFilesPanel panelFTPTransferAvailableFiles;
 	
 	public FTPTransferPanel() {
-		super("FTP Transfer");
+		super("FTP Download");
 
 		this.setSpacing(20);
 		this.init();

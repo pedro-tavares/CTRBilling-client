@@ -15,13 +15,16 @@ public class BillingFileLog implements Serializable {
 	private String FileName;
 	@QueryParam("Timestamp")
 	private Date Timestamp;
+	@QueryParam("Type")
+	private String Type;
 
 	public BillingFileLog() {}
 	
-	public BillingFileLog(String fileName, Date timestamp) {
+	public BillingFileLog(String fileName, Date timestamp, String type) {
 		super();
 		FileName = fileName;
 		Timestamp = timestamp;
+		Type = type;
 	}
 	
 	public Long getId() {
@@ -41,6 +44,14 @@ public class BillingFileLog implements Serializable {
 	}
 	public void setTimestamp(Date timestamp) {
 		Timestamp = timestamp;
+	}
+
+	public String getType() {
+		return Type;
+	}
+
+	public void setType(String type) {
+		Type = type;
 	}
 	
 }
