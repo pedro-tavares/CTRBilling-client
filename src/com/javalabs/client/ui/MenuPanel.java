@@ -12,12 +12,15 @@ public class MenuPanel extends StackLayoutPanel {
 	
 	private static FTPTransferPanel panelFTPTransfer;
 	private static BillingFileLogPanel panelBillingFileLog;
+	private static SupplierPanel panelSupplier;
 
 	private VerticalPanel panelBilling = new VerticalPanel();
 	
 	@SuppressWarnings("deprecation")
 	public MenuPanel() {
 		super(Unit.EM);
+		
+		//Download
 		
 		Hyperlink linkFTPDownload = new Hyperlink("FTP Download", "");
 		linkFTPDownload.addClickHandler(event -> {
@@ -35,11 +38,19 @@ public class MenuPanel extends StackLayoutPanel {
 		
 		panelBilling.add(linkFTPDownload);
 		panelBilling.add(linkFTPLog);
+
+		// Config
+		Hyperlink linkConfigSuppliers = new Hyperlink("Suppliers", "");
+		linkConfigSuppliers.addClickHandler(event -> {
+			panelSupplier = new SupplierPanel(); 
+			JavaLabs.GET().showView(panelSupplier);
+		});
 		
 		this.add(new HTML("Dashboard options"), new HTML("Dashboard"), 4);   
 		this.add(new HTML("My Account  options"), new HTML("My Account"), 4);  
 		this.add(new HTML("Client options"), new HTML("Client"), 4);
 		this.add(panelBilling, new HTML("Billing"), 4);
+		this.add(linkConfigSuppliers, new HTML("Configuration"), 4);
 
 		//TODO
 		/*
