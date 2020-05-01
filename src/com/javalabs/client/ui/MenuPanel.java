@@ -14,11 +14,24 @@ public class MenuPanel extends StackLayoutPanel {
 	private static BillingFileLogPanel panelBillingFileLog;
 	private static SupplierPanel panelSupplier;
 
+	private VerticalPanel panelDashboard = new VerticalPanel();
 	private VerticalPanel panelBilling = new VerticalPanel();
 	
 	@SuppressWarnings("deprecation")
 	public MenuPanel() {
 		super(Unit.EM);
+		
+		// Dashboard
+		
+		Hyperlink linkDashboardInsights = new Hyperlink("Insights", "");
+		linkDashboardInsights.addClickHandler(event -> {
+			//panelFTPTransfer = new FTPTransferPanel();
+			//JavaLabs.GET().showView(panelFTPTransfer);
+			Window.alert("FOK");
+		});
+		linkDashboardInsights.setWidth("191px");
+		
+		panelDashboard.add(linkDashboardInsights);
 		
 		//Download
 		
@@ -27,15 +40,14 @@ public class MenuPanel extends StackLayoutPanel {
 			panelFTPTransfer = new FTPTransferPanel();
 			JavaLabs.GET().showView(panelFTPTransfer);
 		});
-
+		linkFTPDownload.setWidth("191px");
+		
 		Hyperlink linkFTPLog = new Hyperlink("FTP Log", "");
 		linkFTPLog.addClickHandler(event -> {
 			panelBillingFileLog = new BillingFileLogPanel();
 			JavaLabs.GET().showView(panelBillingFileLog);
 		});
 
-		linkFTPDownload.setWidth("191px");
-		
 		panelBilling.add(linkFTPDownload);
 		panelBilling.add(linkFTPLog);
 
@@ -46,7 +58,7 @@ public class MenuPanel extends StackLayoutPanel {
 			JavaLabs.GET().showView(panelSupplier);
 		});
 		
-		this.add(new HTML("Dashboard options"), new HTML("Dashboard"), 4);   
+		this.add(panelDashboard, new HTML("Dashboard"), 4);   
 		this.add(new HTML("My Account  options"), new HTML("My Account"), 4);  
 		this.add(new HTML("Client options"), new HTML("Client"), 4);
 		this.add(panelBilling, new HTML("Billing"), 4);
