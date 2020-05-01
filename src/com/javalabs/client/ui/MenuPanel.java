@@ -12,6 +12,7 @@ public class MenuPanel extends StackLayoutPanel {
 	
 	private static DashboardPanel panelDashboard;
 	private static FTPTransferPanel panelFTPTransfer;
+	private static UploadPanel panelUpload;
 	private static BillingFileLogPanel panelBillingFileLog;
 	private static SupplierPanel panelSupplier;
 
@@ -35,20 +36,28 @@ public class MenuPanel extends StackLayoutPanel {
 		
 		//Download
 		
-		Hyperlink linkFTPDownload = new Hyperlink("FTP Download", "");
+		Hyperlink linkFTPDownload = new Hyperlink("Download", "");
 		linkFTPDownload.addClickHandler(event -> {
 			panelFTPTransfer = new FTPTransferPanel();
 			JavaLabs.GET().showView(panelFTPTransfer);
 		});
 		linkFTPDownload.setWidth("191px");
+
+		Hyperlink linkUpload = new Hyperlink("Upload", "");
+		linkUpload.addClickHandler(event -> {
+			panelUpload = new UploadPanel(); 
+			JavaLabs.GET().showView(panelUpload);
+		});
+		linkUpload.setWidth("191px");
 		
-		Hyperlink linkFTPLog = new Hyperlink("FTP Log", "");
+		Hyperlink linkFTPLog = new Hyperlink("Log", "");
 		linkFTPLog.addClickHandler(event -> {
 			panelBillingFileLog = new BillingFileLogPanel();
 			JavaLabs.GET().showView(panelBillingFileLog);
 		});
 
 		panelBillingMenu.add(linkFTPDownload);
+		panelBillingMenu.add(linkUpload);		
 		panelBillingMenu.add(linkFTPLog);
 
 		// Config

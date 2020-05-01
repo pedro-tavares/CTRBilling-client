@@ -1,6 +1,7 @@
 package com.javalabs.client.ui;
 
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Label;
 
 public class DashboardPanel extends TitledPanel {
 	
@@ -11,7 +12,6 @@ public class DashboardPanel extends TitledPanel {
 		
 		this.setSpacing(20);		
 		this.init();
-
 	}
 	
 	private void init() {

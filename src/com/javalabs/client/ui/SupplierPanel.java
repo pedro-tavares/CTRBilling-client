@@ -94,6 +94,8 @@ public class SupplierPanel extends TitledPanel {
 
 	public void setModel(List<Supplier> model) {
 		SUPPLIER_DATA = model;
+
+		
 		
 		GWT.log("SUPPLIER_RECORDS.size: " + SUPPLIER_DATA.size());
 		
