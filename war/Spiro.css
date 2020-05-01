@@ -138,7 +138,7 @@ button.gwt-Button[disabled] {
   border-bottom: 1px solid #bbbbbb;
 }
 .gwt-DecoratedStackPanel .gwt-StackPanelContent {
-  border: 1px solid #bbbbbb;
+  /*border: 1px solid #bbbbbb;*/
   border-bottom: 0px;
   background: white;
   padding: 2px 2px 10px 5px;
@@ -154,12 +154,12 @@ button.gwt-Button[disabled] {
   zoom: 1;
 }
 .gwt-DecoratedStackPanel .stackItemTopLeft {
-  border-left: 1px solid #bbbbbb;
+  /*border-left: 1px solid #bbbbbb;*/
   background: #d3def6 url(images/corner.png) no-repeat 0px -49px;
   -background: #d3def6 url(images/corner_ie6.png) no-repeat 0px -49px;
 }
 .gwt-DecoratedStackPanel .stackItemTopRight {
-  border-right: 1px solid #bbbbbb;
+  /*border-right: 1px solid #bbbbbb;*/
   background: #d3def6 url(images/corner.png) no-repeat -6px -49px;
   -background: #d3def6 url(images/corner_ie6.png) no-repeat -6px -49px;
 }

@@ -10,12 +10,13 @@ import com.javalabs.client.JavaLabs;
 
 public class MenuPanel extends StackLayoutPanel {
 	
+	private static DashboardPanel panelDashboard;
 	private static FTPTransferPanel panelFTPTransfer;
 	private static BillingFileLogPanel panelBillingFileLog;
 	private static SupplierPanel panelSupplier;
 
-	private VerticalPanel panelDashboard = new VerticalPanel();
-	private VerticalPanel panelBilling = new VerticalPanel();
+	private VerticalPanel panelDashboardMenu = new VerticalPanel();
+	private VerticalPanel panelBillingMenu = new VerticalPanel();
 	
 	@SuppressWarnings("deprecation")
 	public MenuPanel() {
@@ -25,13 +26,12 @@ public class MenuPanel extends StackLayoutPanel {
 		
 		Hyperlink linkDashboardInsights = new Hyperlink("Insights", "");
 		linkDashboardInsights.addClickHandler(event -> {
-			//panelFTPTransfer = new FTPTransferPanel();
-			//JavaLabs.GET().showView(panelFTPTransfer);
-			Window.alert("FOK");
+			panelDashboard = new DashboardPanel(); 
+			JavaLabs.GET().showView(panelDashboard);
 		});
 		linkDashboardInsights.setWidth("191px");
 		
-		panelDashboard.add(linkDashboardInsights);
+		panelDashboardMenu.add(linkDashboardInsights);
 		
 		//Download
 		
@@ -48,8 +48,8 @@ public class MenuPanel extends StackLayoutPanel {
 			JavaLabs.GET().showView(panelBillingFileLog);
 		});
 
-		panelBilling.add(linkFTPDownload);
-		panelBilling.add(linkFTPLog);
+		panelBillingMenu.add(linkFTPDownload);
+		panelBillingMenu.add(linkFTPLog);
 
 		// Config
 		Hyperlink linkConfigSuppliers = new Hyperlink("Suppliers", "");
@@ -58,10 +58,10 @@ public class MenuPanel extends StackLayoutPanel {
 			JavaLabs.GET().showView(panelSupplier);
 		});
 		
-		this.add(panelDashboard, new HTML("Dashboard"), 4);   
+		this.add(panelDashboardMenu, new HTML("Dashboard"), 4);   
 		this.add(new HTML("My Account  options"), new HTML("My Account"), 4);  
 		this.add(new HTML("Client options"), new HTML("Client"), 4);
-		this.add(panelBilling, new HTML("Billing"), 4);
+		this.add(panelBillingMenu, new HTML("Billing"), 4);
 		this.add(linkConfigSuppliers, new HTML("Configuration"), 4);
 
 		//TODO
